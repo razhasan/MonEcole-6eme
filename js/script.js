@@ -1,36 +1,230 @@
 // ============================================ //
-// SCRIPT PRINCIPAL - Logique et Fonctions //
+// SCRIPT COMPLET - TOUTES LES DONNÉES INCLUSES //
 // ============================================ //
 
 // ============================================ //
-// 1. CHARGER LES DONNÉES DES MATIÈRES //
+// 1. DONNÉES DE L'ISLAM (7 JOURS COMPLETS) //
 // ============================================ //
 
-// Les données sont chargées depuis les fichiers séparés :
-// - data-islam.js
-// - data-maths.js (à créer)
-// - data-francais.js (à créer)
-// - data-sciences.js (à créer)
-// - data-histoire.js (à créer)
-// - data-anglais.js (à créer)
-
-// On vérifie que les données sont chargées
-function initSubjects() {
-    const subjects = {};
-    
-    if (typeof DATA_ISLAM !== 'undefined') subjects.islam = DATA_ISLAM;
-    if (typeof DATA_MATHS !== 'undefined') subjects.maths = DATA_MATHS;
-    if (typeof DATA_FRANCAIS !== 'undefined') subjects.francais = DATA_FRANCAIS;
-    if (typeof DATA_SCIENCES !== 'undefined') subjects.sciences = DATA_SCIENCES;
-    if (typeof DATA_HISTOIRE !== 'undefined') subjects.histoire = DATA_HISTOIRE;
-    if (typeof DATA_ANGLAIS !== 'undefined') subjects.anglais = DATA_ANGLAIS;
-    
-    window.SUBJECTS = subjects;
-    return subjects;
-}
+const DATA_ISLAM = {
+    name: 'Éducation Islamique',
+    icon: '🕌',
+    emoji: '🕌',
+    color: '#6C63FF',
+    startDate: '2026-07-14',
+    days: {
+        1: {
+            title: 'Jour 1: Les 5 Piliers de l\'Islam',
+            content: `
+                <div class="lesson-content">
+                    <h3>📖 Les 5 Piliers de l'Islam</h3>
+                    <p>L'Islam repose sur 5 piliers essentiels :</p>
+                    <ul>
+                        <li><strong>1. La Shahada</strong> - La profession de foi</li>
+                        <li><strong>2. La Salat</strong> - Les 5 prières quotidiennes</li>
+                        <li><strong>3. La Zakat</strong> - L'aumône obligatoire</li>
+                        <li><strong>4. Le Sawm</strong> - Le jeûne du Ramadan</li>
+                        <li><strong>5. Le Hajj</strong> - Le pèlerinage à La Mecque</li>
+                    </ul>
+                    <div class="lesson-tip">💡 Les piliers sont comme les fondations d'une maison !</div>
+                </div>
+            `,
+            quiz: {
+                questions: [
+                    { question: "Combien y a-t-il de piliers en Islam ?", options: ["3", "4", "5", "6"], correct: 2 },
+                    { question: "Que signifie la Shahada ?", options: ["La prière", "La profession de foi", "Le jeûne", "Le pèlerinage"], correct: 1 },
+                    { question: "Combien de prières quotidiennes y a-t-il ?", options: ["3", "4", "5", "6"], correct: 2 },
+                    { question: "Qu'est-ce que la Zakat ?", options: ["Le jeûne", "L'aumône obligatoire", "Le pèlerinage", "La prière"], correct: 1 },
+                    { question: "Pendant quel mois jeûne-t-on ?", options: ["Muharram", "Ramadan", "Dhu al-Hijjah", "Rabi' al-Awwal"], correct: 1 }
+                ]
+            }
+        },
+        2: {
+            title: 'Jour 2: La Shahada',
+            content: `
+                <div class="lesson-content">
+                    <h3>📖 La Shahada</h3>
+                    <p>La Shahada est la porte d'entrée de l'Islam.</p>
+                    <div class="arabic-text">
+                        <p>أشهد أن لا إله إلا الله وأشهد أن محمداً رسول الله</p>
+                        <p><em>"Ash-hadu an la ilaha illa Allah, wa ash-hadu anna Muhammadan rasulu Allah"</em></p>
+                    </div>
+                    <p><strong>Signification :</strong></p>
+                    <ul>
+                        <li>🔹 "La ilaha illa Allah" : Il n'y a de dieu qu'Allah</li>
+                        <li>🔹 "Muhammadan rasulu Allah" : Muhammad est le messager d'Allah</li>
+                    </ul>
+                    <div class="lesson-tip">💡 Pour être musulman, il suffit de prononcer la Shahada avec sincérité !</div>
+                </div>
+            `,
+            quiz: {
+                questions: [
+                    { question: "Que signifie 'La ilaha illa Allah' ?", options: ["Dieu est grand", "Il n'y a de dieu qu'Allah", "Muhammad est le messager", "Allah est le seul"], correct: 1 },
+                    { question: "Qui est le dernier prophète de l'Islam ?", options: ["Ibrahim", "Musa", "Muhammad", "Isa"], correct: 2 },
+                    { question: "Qu'est-ce que la Shahada ?", options: ["La prière", "La profession de foi", "Le jeûne", "Le pèlerinage"], correct: 1 },
+                    { question: "La Shahada est-elle importante ?", options: ["Non", "Oui, c'est le premier pilier", "Seulement pour les adultes", "Pas vraiment"], correct: 1 },
+                    { question: "Que signifie 'Muhammadan rasulu Allah' ?", options: ["Muhammad est aimé", "Muhammad est le messager", "Muhammad est le fils", "Muhammad est un prophète"], correct: 1 }
+                ]
+            }
+        },
+        3: {
+            title: 'Jour 3: La Salat - La Prière',
+            content: `
+                <div class="lesson-content">
+                    <h3>🕌 La Salat - Les 5 Prières</h3>
+                    <p>La Salat est le deuxième pilier de l'Islam.</p>
+                    <ul>
+                        <li>🌅 <strong>Fajr</strong> - Avant le lever du soleil</li>
+                        <li>☀️ <strong>Dhuhr</strong> - Après le midi</li>
+                        <li>🌤️ <strong>Asr</strong> - L'après-midi</li>
+                        <li>🌅 <strong>Maghrib</strong> - Après le coucher du soleil</li>
+                        <li>🌙 <strong>Isha</strong> - La nuit</li>
+                    </ul>
+                    <div class="lesson-tip">💡 La prière est un moment de connexion avec Allah !</div>
+                </div>
+            `,
+            quiz: {
+                questions: [
+                    { question: "Combien de prières quotidiennes ?", options: ["3", "4", "5", "7"], correct: 2 },
+                    { question: "Quelle prière est faite avant le lever du soleil ?", options: ["Dhuhr", "Fajr", "Asr", "Maghrib"], correct: 1 },
+                    { question: "La Salat est le combien de pilier ?", options: ["1er", "2ème", "3ème", "4ème"], correct: 1 },
+                    { question: "Quelle prière est faite la nuit ?", options: ["Fajr", "Dhuhr", "Maghrib", "Isha"], correct: 3 },
+                    { question: "Combien de rak'ahs a Maghrib ?", options: ["2", "3", "4", "5"], correct: 1 }
+                ]
+            }
+        },
+        4: {
+            title: 'Jour 4: La Zakat',
+            content: `
+                <div class="lesson-content">
+                    <h3>💰 La Zakat - L'Aumône</h3>
+                    <p>La Zakat est le troisième pilier de l'Islam.</p>
+                    <ul>
+                        <li>🔹 On donne <strong>2.5%</strong> de son épargne</li>
+                        <li>🔹 La Zakat purifie l'argent</li>
+                        <li>🔹 Elle est donnée aux pauvres et dans le besoin</li>
+                    </ul>
+                    <div class="lesson-tip">💡 La Zakat enseigne le partage et la solidarité !</div>
+                </div>
+            `,
+            quiz: {
+                questions: [
+                    { question: "Quel pourcentage donne-t-on en Zakat ?", options: ["1%", "2.5%", "5%", "10%"], correct: 1 },
+                    { question: "La Zakat est le combien de pilier ?", options: ["1er", "2ème", "3ème", "4ème"], correct: 2 },
+                    { question: "À qui donne-t-on la Zakat ?", options: ["Aux riches", "Aux pauvres", "Aux non-musulmans", "À personne"], correct: 1 },
+                    { question: "Quelle est la fréquence de la Zakat ?", options: ["Chaque mois", "Chaque année", "Une fois dans la vie", "Chaque jour"], correct: 1 },
+                    { question: "La Zakat purifie-t-elle l'argent ?", options: ["Oui", "Non", "Parfois", "Seulement pour les riches"], correct: 0 }
+                ]
+            }
+        },
+        5: {
+            title: 'Jour 5: Le Sawm - Le Jeûne',
+            content: `
+                <div class="lesson-content">
+                    <h3>🌙 Le Sawm - Le Jeûne du Ramadan</h3>
+                    <p>Le Sawm est le quatrième pilier de l'Islam.</p>
+                    <ul>
+                        <li>🔹 On jeûne <strong>de l'aube au coucher du soleil</strong></li>
+                        <li>🔹 On ne mange pas et on ne boit pas</li>
+                        <li>🔹 Le Ramadan est le 9ème mois du calendrier islamique</li>
+                    </ul>
+                    <div class="lesson-tip">💡 Le jeûne enseigne la patience et la discipline !</div>
+                </div>
+            `,
+            quiz: {
+                questions: [
+                    { question: "Pendant combien de temps jeûne-t-on ?", options: ["Du lever au coucher du soleil", "Du midi au soir", "24 heures", "Du matin au midi"], correct: 0 },
+                    { question: "Le Ramadan est quel mois ?", options: ["7ème", "8ème", "9ème", "10ème"], correct: 2 },
+                    { question: "Le Sawm est le combien de pilier ?", options: ["2ème", "3ème", "4ème", "5ème"], correct: 2 },
+                    { question: "Qu'apprend-on par le jeûne ?", options: ["La patience", "La paresse", "La colère", "La tristesse"], correct: 0 },
+                    { question: "Les enfants doivent-ils jeûner dès leur plus jeune âge ?", options: ["Oui, tout de suite", "Non, progressivement", "Non, jamais", "Seulement les garçons"], correct: 1 }
+                ]
+            }
+        },
+        6: {
+            title: 'Jour 6: Le Hajj - Le Pèlerinage',
+            content: `
+                <div class="lesson-content">
+                    <h3>🕋 Le Hajj - Le Pèlerinage</h3>
+                    <p>Le Hajj est le cinquième pilier de l'Islam.</p>
+                    <ul>
+                        <li>🔹 Il a lieu pendant Dhu al-Hijjah</li>
+                        <li>🔹 Les pèlerins portent un vêtement blanc (Ihram)</li>
+                        <li>🔹 Ils font le tour de la Kaaba 7 fois</li>
+                    </ul>
+                    <div class="lesson-tip">💡 Le Hajj rassemble des millions de musulmans !</div>
+                </div>
+            `,
+            quiz: {
+                questions: [
+                    { question: "Le Hajj est le combien de pilier ?", options: ["3ème", "4ème", "5ème", "6ème"], correct: 2 },
+                    { question: "Où se trouve La Mecque ?", options: ["Arabie Saoudite", "Égypte", "Maroc", "Turquie"], correct: 0 },
+                    { question: "Combien de fois les pèlerins font-ils le tour de la Kaaba ?", options: ["3", "5", "7", "10"], correct: 2 },
+                    { question: "Quel vêtement portent les pèlerins ?", options: ["Coloré", "Blanc (Ihram)", "Costume", "Uniforme"], correct: 1 },
+                    { question: "Le Hajj doit être fait combien de fois ?", options: ["Chaque année", "Au moins une fois", "Jamais", "10 fois"], correct: 1 }
+                ]
+            }
+        },
+        7: {
+            title: 'Jour 7: Quiz Hebdomadaire',
+            content: `
+                <div class="lesson-content">
+                    <h3>📚 Révision de la Semaine</h3>
+                    <p>Félicitations ! Voici un résumé de ce que tu as appris :</p>
+                    <ul>
+                        <li>📖 <strong>Jour 1</strong> : Les 5 Piliers de l'Islam</li>
+                        <li>📖 <strong>Jour 2</strong> : La Shahada</li>
+                        <li>🕌 <strong>Jour 3</strong> : La Salat</li>
+                        <li>💰 <strong>Jour 4</strong> : La Zakat</li>
+                        <li>🌙 <strong>Jour 5</strong> : Le Sawm</li>
+                        <li>🕋 <strong>Jour 6</strong> : Le Hajj</li>
+                    </ul>
+                    <div class="lesson-tip">🌟 20 questions t'attendent ! 65% pour réussir.</div>
+                </div>
+            `,
+            quiz: {
+                questions: [
+                    { question: "Combien y a-t-il de piliers en Islam ?", options: ["3", "4", "5", "6"], correct: 2 },
+                    { question: "Qu'est-ce que la Shahada ?", options: ["La prière", "La profession de foi", "Le jeûne", "Le pèlerinage"], correct: 1 },
+                    { question: "Combien de prières quotidiennes ?", options: ["3", "4", "5", "6"], correct: 2 },
+                    { question: "Quel pourcentage donne-t-on en Zakat ?", options: ["1%", "2.5%", "5%", "10%"], correct: 1 },
+                    { question: "Pendant quel mois jeûne-t-on ?", options: ["Muharram", "Ramadan", "Dhu al-Hijjah", "Rabi' al-Awwal"], correct: 1 },
+                    { question: "Où se trouve La Mecque ?", options: ["Arabie Saoudite", "Égypte", "Maroc", "Turquie"], correct: 0 },
+                    { question: "Le Sawm est le combien de pilier ?", options: ["2ème", "3ème", "4ème", "5ème"], correct: 2 },
+                    { question: "La Salat est le combien de pilier ?", options: ["1er", "2ème", "3ème", "4ème"], correct: 1 },
+                    { question: "Quelle prière est faite avant le lever du soleil ?", options: ["Dhuhr", "Fajr", "Asr", "Maghrib"], correct: 1 },
+                    { question: "Le Hajj est le combien de pilier ?", options: ["3ème", "4ème", "5ème", "6ème"], correct: 2 },
+                    { question: "Qu'apprend-on par le jeûne ?", options: ["La patience", "La paresse", "La colère", "La tristesse"], correct: 0 },
+                    { question: "À qui donne-t-on la Zakat ?", options: ["Aux riches", "Aux pauvres", "Aux non-musulmans", "À personne"], correct: 1 },
+                    { question: "Que signifie 'La ilaha illa Allah' ?", options: ["Dieu est grand", "Il n'y a de dieu qu'Allah", "Muhammad est le messager", "Allah est le seul"], correct: 1 },
+                    { question: "Quel vêtement portent les pèlerins ?", options: ["Coloré", "Blanc (Ihram)", "Costume", "Uniforme"], correct: 1 },
+                    { question: "Le Ramadan est quel mois ?", options: ["7ème", "8ème", "9ème", "10ème"], correct: 2 },
+                    { question: "Qui est le dernier prophète ?", options: ["Ibrahim", "Musa", "Muhammad", "Isa"], correct: 2 },
+                    { question: "La Zakat est le combien de pilier ?", options: ["1er", "2ème", "3ème", "4ème"], correct: 2 },
+                    { question: "Combien de rak'ahs a Maghrib ?", options: ["2", "3", "4", "5"], correct: 1 },
+                    { question: "Que signifie 'Muhammadan rasulu Allah' ?", options: ["Muhammad est aimé", "Muhammad est le messager", "Muhammad est le fils", "Muhammad est un prophète"], correct: 1 },
+                    { question: "Les 5 piliers sont-ils importants ?", options: ["Oui", "Non", "Parfois", "Seulement pour les hommes"], correct: 0 }
+                ]
+            }
+        }
+    },
+    weeklyQuiz: {
+        passingScore: 65,
+        questions: []
+    }
+};
 
 // ============================================ //
-// 2. DATE MANAGEMENT //
+// 2. RASSEMBLER TOUTES LES MATIÈRES //
+// ============================================ //
+
+const SUBJECTS = {
+    islam: DATA_ISLAM
+    // Ajouter les autres matières ici plus tard
+};
+
+// ============================================ //
+// 3. DATE MANAGEMENT //
 // ============================================ //
 
 const START_DATE = new Date('2026-07-14');
@@ -69,7 +263,7 @@ function formatDate(date) {
 }
 
 // ============================================ //
-// 3. PROGRESS MANAGEMENT //
+// 4. PROGRESS MANAGEMENT //
 // ============================================ //
 
 function getProgress() {
@@ -129,21 +323,14 @@ function getAverageScore(subjectKey) {
 }
 
 // ============================================ //
-// 4. DASHBOARD UPDATE //
+// 5. DASHBOARD UPDATE //
 // ============================================ //
 
 function updateDashboard() {
-    // Initialiser les données si pas encore fait
-    if (!window.SUBJECTS) initSubjects();
-    const subjects = window.SUBJECTS || {};
-    
-    // Update date
     const dateEl = document.getElementById('date-text');
     if (dateEl) dateEl.textContent = getTodayDate();
     
-    const subjectKeys = Object.keys(subjects);
-    if (subjectKeys.length === 0) return;
-    
+    const subjectKeys = Object.keys(SUBJECTS);
     let totalCompleted = 0;
     let totalPossible = subjectKeys.length * TOTAL_DAYS;
     let totalQuizzesPassed = 0;
@@ -208,7 +395,7 @@ function updateDashboard() {
 }
 
 // ============================================ //
-// 5. PIE CHART //
+// 6. PIE CHART //
 // ============================================ //
 
 function drawPieChart(percentage) {
@@ -252,7 +439,7 @@ function drawPieChart(percentage) {
 }
 
 // ============================================ //
-// 6. MOTIVATION //
+// 7. MOTIVATION //
 // ============================================ //
 
 const MOTIVATIONS = [
@@ -272,23 +459,17 @@ function updateMotivation() {
     
     const messageEl = document.getElementById('daily-message');
     if (messageEl) {
-        messageEl.textContent = motivation.message;
         messageEl.textContent = `${motivation.emoji} ${motivation.message}`;
     }
 }
 
 // ============================================ //
-// 7. NAVIGATION //
+// 8. NAVIGATION //
 // ============================================ //
 
 function goToSubject(subjectKey) {
     const subjectNames = {
-        islam: 'islam',
-        maths: 'maths',
-        francais: 'francais',
-        sciences: 'sciences',
-        histoire: 'histoire',
-        anglais: 'anglais'
+        islam: 'islam'
     };
     
     if (subjectNames[subjectKey]) {
@@ -299,20 +480,20 @@ function goToSubject(subjectKey) {
 }
 
 // ============================================ //
-// 8. INITIALIZATION //
+// 9. INITIALIZATION //
 // ============================================ //
 
 document.addEventListener('DOMContentLoaded', function() {
-    initSubjects();
     updateDashboard();
     setInterval(updateDashboard, 60000);
 });
 
 // ============================================ //
-// 9. EXPOSE TO GLOBAL SCOPE //
+// 10. EXPOSE TO GLOBAL SCOPE //
 // ============================================ //
 
-window.initSubjects = initSubjects;
+window.SUBJECTS = SUBJECTS;
+window.DATA_ISLAM = DATA_ISLAM;
 window.getCurrentDay = getCurrentDay;
 window.getTodayDate = getTodayDate;
 window.getDateForDay = getDateForDay;
