@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="../css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Styles spécifiques à la page Islam */
         .subject-header {
             background: linear-gradient(135deg, #6C63FF 0%, #5A52D5 100%);
             padding: 30px 20px;
@@ -16,17 +15,8 @@
             text-align: center;
             margin-bottom: 30px;
         }
-        
-        .subject-header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 5px;
-        }
-        
-        .subject-header .subtitle {
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
-        
+        .subject-header h1 { font-size: 2.5rem; margin-bottom: 5px; }
+        .subject-header .subtitle { font-size: 1.1rem; opacity: 0.9; }
         .subject-header .date-info {
             background: rgba(255,255,255,0.2);
             padding: 8px 20px;
@@ -35,7 +25,6 @@
             margin-top: 10px;
             font-weight: 600;
         }
-        
         .back-home {
             display: inline-block;
             color: white;
@@ -46,11 +35,8 @@
             margin-bottom: 10px;
             transition: all 0.3s;
         }
-        
-        .back-home:hover {
-            background: rgba(255,255,255,0.3);
-            transform: translateX(-3px);
-        }
+        .back-home:hover { background: rgba(255,255,255,0.3); transform: translateX(-3px); }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
         
         .lesson-container {
             background: white;
@@ -60,7 +46,6 @@
             margin-bottom: 20px;
             min-height: 300px;
         }
-        
         .lesson-container .day-badge {
             display: inline-block;
             background: #6C63FF;
@@ -71,18 +56,15 @@
             font-weight: 600;
             margin-bottom: 15px;
         }
-        
         .lesson-container .lesson-content h3 {
             color: #6C63FF;
             font-size: 1.5rem;
             margin-bottom: 15px;
         }
-        
         .lesson-container .lesson-content ul {
             list-style: none;
             padding: 0;
         }
-        
         .lesson-container .lesson-content ul li {
             padding: 10px 15px;
             margin-bottom: 8px;
@@ -90,7 +72,6 @@
             border-radius: 12px;
             border-left: 4px solid #6C63FF;
         }
-        
         .lesson-container .lesson-content .lesson-tip {
             background: #fff3cd;
             padding: 15px 20px;
@@ -98,7 +79,6 @@
             margin-top: 15px;
             border-left: 4px solid #ffc107;
         }
-        
         .lesson-container .lesson-content .arabic-text {
             background: #f0f0f0;
             padding: 20px;
@@ -109,7 +89,6 @@
             direction: rtl;
             font-family: 'Arial', sans-serif;
         }
-        
         .lesson-container .lesson-content .arabic-text em {
             display: block;
             font-size: 1rem;
@@ -125,7 +104,6 @@
             margin: 20px 0;
             flex-wrap: wrap;
         }
-        
         .navigation-buttons button {
             padding: 12px 30px;
             border: none;
@@ -138,33 +116,11 @@
             flex: 1;
             min-width: 120px;
         }
-        
-        .btn-prev {
-            background: #ecf0f1;
-            color: #2d3436;
-        }
-        
-        .btn-prev:hover:not(:disabled) {
-            background: #d5d8da;
-            transform: translateX(-3px);
-        }
-        
-        .btn-next {
-            background: #6C63FF;
-            color: white;
-        }
-        
-        .btn-next:hover:not(:disabled) {
-            background: #5A52D5;
-            transform: translateX(3px);
-            box-shadow: 0 5px 20px rgba(108,99,255,0.3);
-        }
-        
-        .btn-next:disabled, .btn-prev:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none !important;
-        }
+        .btn-prev { background: #ecf0f1; color: #2d3436; }
+        .btn-prev:hover:not(:disabled) { background: #d5d8da; transform: translateX(-3px); }
+        .btn-next { background: #6C63FF; color: white; }
+        .btn-next:hover:not(:disabled) { background: #5A52D5; transform: translateX(3px); box-shadow: 0 5px 20px rgba(108,99,255,0.3); }
+        .btn-next:disabled, .btn-prev:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important; }
         
         .quiz-container {
             background: white;
@@ -174,17 +130,8 @@
             margin-top: 20px;
             display: none;
         }
-        
-        .quiz-container.active {
-            display: block;
-            animation: fadeInUp 0.5s ease-out;
-        }
-        
-        .quiz-container h3 {
-            color: #6C63FF;
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-        }
+        .quiz-container.active { display: block; animation: fadeInUp 0.5s ease-out; }
+        .quiz-container h3 { color: #6C63FF; font-size: 1.5rem; margin-bottom: 20px; }
         
         .question {
             margin-bottom: 25px;
@@ -192,19 +139,8 @@
             background: #f8f9fa;
             border-radius: 12px;
         }
-        
-        .question p {
-            font-weight: 600;
-            margin-bottom: 10px;
-            font-size: 1.05rem;
-        }
-        
-        .options {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-        
+        .question p { font-weight: 600; margin-bottom: 10px; font-size: 1.05rem; }
+        .options { display: flex; flex-direction: column; gap: 8px; }
         .options label {
             display: flex;
             align-items: center;
@@ -216,17 +152,8 @@
             transition: all 0.2s;
             border: 2px solid transparent;
         }
-        
-        .options label:hover {
-            border-color: #8B83FF;
-            background: #f0edff;
-        }
-        
-        .options input[type="radio"] {
-            width: 18px;
-            height: 18px;
-            accent-color: #6C63FF;
-        }
+        .options label:hover { border-color: #8B83FF; background: #f0edff; }
+        .options input[type="radio"] { width: 18px; height: 18px; accent-color: #6C63FF; }
         
         .btn-submit {
             background: #6BCB77;
@@ -240,11 +167,7 @@
             transition: all 0.3s;
             font-family: 'Quicksand', sans-serif;
         }
-        
-        .btn-submit:hover {
-            transform: scale(1.03);
-            box-shadow: 0 5px 20px rgba(107,203,119,0.3);
-        }
+        .btn-submit:hover { transform: scale(1.03); box-shadow: 0 5px 20px rgba(107,203,119,0.3); }
         
         .quiz-result {
             padding: 20px;
@@ -255,20 +178,8 @@
             font-size: 1.2rem;
             display: none;
         }
-        
-        .quiz-result.success {
-            display: block;
-            background: #d4edda;
-            color: #155724;
-            border: 2px solid #6BCB77;
-        }
-        
-        .quiz-result.fail {
-            display: block;
-            background: #f8d7da;
-            color: #721c24;
-            border: 2px solid #FF6B6B;
-        }
+        .quiz-result.success { display: block; background: #d4edda; color: #155724; border: 2px solid #6BCB77; }
+        .quiz-result.fail { display: block; background: #f8d7da; color: #721c24; border: 2px solid #FF6B6B; }
         
         .progress-bar-container {
             background: #ecf0f1;
@@ -277,7 +188,6 @@
             margin: 20px 0;
             overflow: hidden;
         }
-        
         .progress-bar-fill {
             height: 100%;
             border-radius: 15px;
@@ -286,49 +196,12 @@
             width: 0%;
         }
         
-        .weekly-quiz-container {
-            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
-            border-radius: 20px;
-            padding: 30px;
-            margin-top: 20px;
-            display: none;
-            border: 3px solid #ff6b6b;
-        }
-        
-        .weekly-quiz-container.active {
-            display: block;
-            animation: fadeInUp 0.6s ease-out;
-        }
-        
-        .weekly-quiz-container h3 {
-            color: #e17055;
-            font-size: 1.8rem;
-            text-align: center;
-        }
-        
-        .weekly-quiz-container .subtitle {
-            text-align: center;
-            font-size: 1.1rem;
-            color: #636e72;
-            margin-bottom: 20px;
-        }
-        
-        .weekly-quiz-container .passing-info {
-            background: white;
-            padding: 10px 20px;
-            border-radius: 12px;
-            text-align: center;
-            font-weight: 600;
-            margin-bottom: 20px;
-        }
-        
         .week-progress {
             display: flex;
             justify-content: space-between;
             gap: 8px;
             margin: 20px 0;
         }
-        
         .week-day {
             flex: 1;
             text-align: center;
@@ -340,21 +213,9 @@
             color: #999;
             transition: all 0.3s;
         }
-        
-        .week-day.completed {
-            background: #d4edda;
-            color: #155724;
-        }
-        
-        .week-day.current {
-            background: #6C63FF;
-            color: white;
-        }
-        
-        .week-day.locked {
-            background: #f8d7da;
-            color: #721c24;
-        }
+        .week-day.completed { background: #d4edda; color: #155724; }
+        .week-day.current { background: #6C63FF; color: white; }
+        .week-day.locked { background: #f8d7da; color: #721c24; }
         
         .message-box {
             text-align: center;
@@ -363,21 +224,21 @@
             border-radius: 15px;
             margin: 20px 0;
         }
+        .message-box .big-emoji { font-size: 4rem; }
+        .message-box h3 { font-size: 1.5rem; color: #6C63FF; margin: 15px 0; }
+        .message-box p { color: #636e72; font-size: 1.1rem; }
         
-        .message-box .big-emoji {
-            font-size: 4rem;
+        footer {
+            background: #2d3436;
+            color: rgba(255,255,255,0.8);
+            padding: 30px 20px;
+            text-align: center;
+            border-top-left-radius: 30px;
+            border-top-right-radius: 30px;
+            margin-top: 20px;
         }
-        
-        .message-box h3 {
-            font-size: 1.5rem;
-            color: #6C63FF;
-            margin: 15px 0;
-        }
-        
-        .message-box p {
-            color: #636e72;
-            font-size: 1.1rem;
-        }
+        footer p { font-size: 1.1rem; }
+        footer .footer-small { font-size: 0.85rem; opacity: 0.6; margin-top: 5px; }
         
         @media (max-width: 768px) {
             .subject-header h1 { font-size: 2rem; }
@@ -386,13 +247,14 @@
             .quiz-container { padding: 20px; }
             .week-day { font-size: 0.6rem; padding: 5px 2px; }
         }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body>
 
-    <!-- ============================================ -->
-    <!-- HEADER -->
-    <!-- ============================================ -->
     <header class="subject-header">
         <div class="container">
             <a href="../index.html" class="back-home">🏠 Retour à l'accueil</a>
@@ -402,62 +264,31 @@
         </div>
     </header>
 
-    <!-- ============================================ -->
-    <!-- MAIN CONTENT -->
-    <!-- ============================================ -->
     <div class="container">
 
-        <!-- Progress Bar -->
         <div class="progress-bar-container">
             <div class="progress-bar-fill" id="subjectProgress" style="width: 0%;"></div>
         </div>
 
-        <!-- Week Progress -->
-        <div class="week-progress" id="weekProgress">
-            <!-- Generated by JavaScript -->
-        </div>
+        <div class="week-progress" id="weekProgress"></div>
 
-        <!-- ============================================ -->
-        <!-- LESSON CONTAINER -->
-        <!-- ============================================ -->
         <div id="lessonContainer" class="lesson-container">
-            <!-- Dynamic content loaded by JavaScript -->
+            <div class="message-box">
+                <div class="big-emoji">⏳</div>
+                <h3>Chargement...</h3>
+                <p>Veuillez patienter un instant.</p>
+            </div>
         </div>
 
-        <!-- ============================================ -->
-        <!-- NAVIGATION -->
-        <!-- ============================================ -->
         <div class="navigation-buttons">
             <button class="btn-prev" id="prevDay" disabled>← Jour précédent</button>
             <button class="btn-next" id="nextDay">Prochain jour →</button>
         </div>
 
-        <!-- ============================================ -->
-        <!-- QUIZ CONTAINER -->
-        <!-- ============================================ -->
-        <div id="quizContainer" class="quiz-container">
-            <!-- Dynamic quiz loaded by JavaScript -->
-        </div>
-
-        <!-- ============================================ -->
-        <!-- WEEKLY QUIZ CONTAINER -->
-        <!-- ============================================ -->
-        <div id="weeklyQuizContainer" class="weekly-quiz-container">
-            <!-- Dynamic weekly quiz loaded by JavaScript -->
-        </div>
-
-        <!-- ============================================ -->
-        <!-- MESSAGE BOX -->
-        <!-- ============================================ -->
-        <div id="messageBox" style="display: none;">
-            <!-- Dynamic message -->
-        </div>
+        <div id="quizContainer" class="quiz-container"></div>
 
     </div>
 
-    <!-- ============================================ -->
-    <!-- FOOTER -->
-    <!-- ============================================ -->
     <footer>
         <div class="container">
             <p>💖 Fait avec amour pour ma fille bien-aimée 💖</p>
@@ -465,353 +296,474 @@
         </div>
     </footer>
 
-    <!-- ============================================ -->
-    <!-- JAVASCRIPT -->
-    <!-- ============================================ -->
-    <!-- Le script principal contient TOUTES les données -->
-    <script src="../js/script.js"></script>
-    
-    <!-- ============================================ -->
-    <!-- SCRIPT SPÉCIFIQUE POUR LA PAGE ISLAM -->
-    <!-- ============================================ -->
     <script>
         // ============================================ //
-        // PAGE ISLAM - LOGIQUE SPÉCIFIQUE
+        // TOUTES LES DONNÉES DE L'ISLAM (7 JOURS) //
+        // ============================================ //
+        
+        const SUBJECT_DATA = {
+            name: 'Éducation Islamique',
+            icon: '🕌',
+            color: '#6C63FF',
+            startDate: '2026-07-14',
+            days: {
+                1: {
+                    title: 'Jour 1: Les 5 Piliers de l\'Islam',
+                    content: `
+                        <div class="lesson-content">
+                            <h3>📖 Les 5 Piliers de l'Islam</h3>
+                            <p>L'Islam repose sur 5 piliers essentiels qui guident la vie de chaque musulman :</p>
+                            <ul>
+                                <li><strong>1. La Shahada</strong> - La profession de foi</li>
+                                <li><strong>2. La Salat</strong> - Les 5 prières quotidiennes</li>
+                                <li><strong>3. La Zakat</strong> - L'aumône obligatoire (2.5%)</li>
+                                <li><strong>4. Le Sawm</strong> - Le jeûne du mois de Ramadan</li>
+                                <li><strong>5. Le Hajj</strong> - Le pèlerinage à La Mecque</li>
+                            </ul>
+                            <div class="lesson-tip">💡 Les piliers sont comme les fondations d'une maison !</div>
+                        </div>
+                    `,
+                    quiz: {
+                        questions: [
+                            { question: "Combien y a-t-il de piliers en Islam ?", options: ["3", "4", "5", "6"], correct: 2 },
+                            { question: "Que signifie la Shahada ?", options: ["La prière", "La profession de foi", "Le jeûne", "Le pèlerinage"], correct: 1 },
+                            { question: "Combien de prières quotidiennes y a-t-il ?", options: ["3", "4", "5", "6"], correct: 2 },
+                            { question: "Qu'est-ce que la Zakat ?", options: ["Le jeûne", "L'aumône obligatoire", "Le pèlerinage", "La prière"], correct: 1 },
+                            { question: "Pendant quel mois jeûne-t-on ?", options: ["Muharram", "Ramadan", "Dhu al-Hijjah", "Rabi' al-Awwal"], correct: 1 }
+                        ]
+                    }
+                },
+                2: {
+                    title: 'Jour 2: La Shahada',
+                    content: `
+                        <div class="lesson-content">
+                            <h3>📖 La Shahada - La Profession de Foi</h3>
+                            <p>La Shahada est la porte d'entrée de l'Islam.</p>
+                            <div class="arabic-text">
+                                <p>أشهد أن لا إله إلا الله وأشهد أن محمداً رسول الله</p>
+                                <p><em>"Ash-hadu an la ilaha illa Allah, wa ash-hadu anna Muhammadan rasulu Allah"</em></p>
+                            </div>
+                            <p><strong>Signification :</strong></p>
+                            <ul>
+                                <li>🔹 "La ilaha illa Allah" : Il n'y a de dieu qu'Allah</li>
+                                <li>🔹 "Muhammadan rasulu Allah" : Muhammad est le messager d'Allah</li>
+                            </ul>
+                            <div class="lesson-tip">💡 Pour être musulman, il suffit de prononcer la Shahada avec sincérité !</div>
+                        </div>
+                    `,
+                    quiz: {
+                        questions: [
+                            { question: "Que signifie 'La ilaha illa Allah' ?", options: ["Dieu est grand", "Il n'y a de dieu qu'Allah", "Muhammad est le messager", "Allah est le seul"], correct: 1 },
+                            { question: "Qui est le dernier prophète de l'Islam ?", options: ["Ibrahim", "Musa", "Muhammad", "Isa"], correct: 2 },
+                            { question: "Qu'est-ce que la Shahada ?", options: ["La prière", "La profession de foi", "Le jeûne", "Le pèlerinage"], correct: 1 },
+                            { question: "La Shahada est-elle importante ?", options: ["Non", "Oui, c'est le premier pilier", "Seulement pour les adultes", "Pas vraiment"], correct: 1 },
+                            { question: "Que signifie 'Muhammadan rasulu Allah' ?", options: ["Muhammad est aimé", "Muhammad est le messager", "Muhammad est le fils", "Muhammad est un prophète"], correct: 1 }
+                        ]
+                    }
+                },
+                3: {
+                    title: 'Jour 3: La Salat - La Prière',
+                    content: `
+                        <div class="lesson-content">
+                            <h3>🕌 La Salat - Les 5 Prières</h3>
+                            <p>La Salat est le deuxième pilier de l'Islam.</p>
+                            <ul>
+                                <li>🌅 <strong>Fajr</strong> - Avant le lever du soleil</li>
+                                <li>☀️ <strong>Dhuhr</strong> - Après le midi</li>
+                                <li>🌤️ <strong>Asr</strong> - L'après-midi</li>
+                                <li>🌅 <strong>Maghrib</strong> - Après le coucher du soleil</li>
+                                <li>🌙 <strong>Isha</strong> - La nuit</li>
+                            </ul>
+                            <div class="lesson-tip">💡 La prière est un moment de connexion avec Allah !</div>
+                        </div>
+                    `,
+                    quiz: {
+                        questions: [
+                            { question: "Combien de prières quotidiennes ?", options: ["3", "4", "5", "7"], correct: 2 },
+                            { question: "Quelle prière est faite avant le lever du soleil ?", options: ["Dhuhr", "Fajr", "Asr", "Maghrib"], correct: 1 },
+                            { question: "La Salat est le combien de pilier ?", options: ["1er", "2ème", "3ème", "4ème"], correct: 1 },
+                            { question: "Quelle prière est faite la nuit ?", options: ["Fajr", "Dhuhr", "Maghrib", "Isha"], correct: 3 },
+                            { question: "Combien de rak'ahs a Maghrib ?", options: ["2", "3", "4", "5"], correct: 1 }
+                        ]
+                    }
+                },
+                4: {
+                    title: 'Jour 4: La Zakat',
+                    content: `
+                        <div class="lesson-content">
+                            <h3>💰 La Zakat - L'Aumône</h3>
+                            <p>La Zakat est le troisième pilier de l'Islam.</p>
+                            <ul>
+                                <li>🔹 On donne <strong>2.5%</strong> de son épargne</li>
+                                <li>🔹 La Zakat purifie l'argent</li>
+                                <li>🔹 Elle est donnée aux pauvres et dans le besoin</li>
+                            </ul>
+                            <div class="lesson-tip">💡 La Zakat enseigne le partage et la solidarité !</div>
+                        </div>
+                    `,
+                    quiz: {
+                        questions: [
+                            { question: "Quel pourcentage donne-t-on en Zakat ?", options: ["1%", "2.5%", "5%", "10%"], correct: 1 },
+                            { question: "La Zakat est le combien de pilier ?", options: ["1er", "2ème", "3ème", "4ème"], correct: 2 },
+                            { question: "À qui donne-t-on la Zakat ?", options: ["Aux riches", "Aux pauvres", "Aux non-musulmans", "À personne"], correct: 1 },
+                            { question: "Quelle est la fréquence de la Zakat ?", options: ["Chaque mois", "Chaque année", "Une fois dans la vie", "Chaque jour"], correct: 1 },
+                            { question: "La Zakat purifie-t-elle l'argent ?", options: ["Oui", "Non", "Parfois", "Seulement pour les riches"], correct: 0 }
+                        ]
+                    }
+                },
+                5: {
+                    title: 'Jour 5: Le Sawm - Le Jeûne',
+                    content: `
+                        <div class="lesson-content">
+                            <h3>🌙 Le Sawm - Le Jeûne du Ramadan</h3>
+                            <p>Le Sawm est le quatrième pilier de l'Islam.</p>
+                            <ul>
+                                <li>🔹 On jeûne <strong>de l'aube au coucher du soleil</strong></li>
+                                <li>🔹 On ne mange pas et on ne boit pas</li>
+                                <li>🔹 Le Ramadan est le 9ème mois du calendrier islamique</li>
+                            </ul>
+                            <div class="lesson-tip">💡 Le jeûne enseigne la patience et la discipline !</div>
+                        </div>
+                    `,
+                    quiz: {
+                        questions: [
+                            { question: "Pendant combien de temps jeûne-t-on ?", options: ["Du lever au coucher du soleil", "Du midi au soir", "24 heures", "Du matin au midi"], correct: 0 },
+                            { question: "Le Ramadan est quel mois ?", options: ["7ème", "8ème", "9ème", "10ème"], correct: 2 },
+                            { question: "Le Sawm est le combien de pilier ?", options: ["2ème", "3ème", "4ème", "5ème"], correct: 2 },
+                            { question: "Qu'apprend-on par le jeûne ?", options: ["La patience", "La paresse", "La colère", "La tristesse"], correct: 0 },
+                            { question: "Les enfants doivent-ils jeûner dès leur plus jeune âge ?", options: ["Oui, tout de suite", "Non, progressivement", "Non, jamais", "Seulement les garçons"], correct: 1 }
+                        ]
+                    }
+                },
+                6: {
+                    title: 'Jour 6: Le Hajj - Le Pèlerinage',
+                    content: `
+                        <div class="lesson-content">
+                            <h3>🕋 Le Hajj - Le Pèlerinage</h3>
+                            <p>Le Hajj est le cinquième pilier de l'Islam.</p>
+                            <ul>
+                                <li>🔹 Il a lieu pendant Dhu al-Hijjah</li>
+                                <li>🔹 Les pèlerins portent un vêtement blanc (Ihram)</li>
+                                <li>🔹 Ils font le tour de la Kaaba 7 fois</li>
+                            </ul>
+                            <div class="lesson-tip">💡 Le Hajj rassemble des millions de musulmans !</div>
+                        </div>
+                    `,
+                    quiz: {
+                        questions: [
+                            { question: "Le Hajj est le combien de pilier ?", options: ["3ème", "4ème", "5ème", "6ème"], correct: 2 },
+                            { question: "Où se trouve La Mecque ?", options: ["Arabie Saoudite", "Égypte", "Maroc", "Turquie"], correct: 0 },
+                            { question: "Combien de fois les pèlerins font-ils le tour de la Kaaba ?", options: ["3", "5", "7", "10"], correct: 2 },
+                            { question: "Quel vêtement portent les pèlerins ?", options: ["Coloré", "Blanc (Ihram)", "Costume", "Uniforme"], correct: 1 },
+                            { question: "Le Hajj doit être fait combien de fois ?", options: ["Chaque année", "Au moins une fois", "Jamais", "10 fois"], correct: 1 }
+                        ]
+                    }
+                },
+                7: {
+                    title: 'Jour 7: Quiz Hebdomadaire',
+                    content: `
+                        <div class="lesson-content">
+                            <h3>📚 Révision de la Semaine</h3>
+                            <p>Félicitations ! Voici un résumé de ce que tu as appris :</p>
+                            <ul>
+                                <li>📖 <strong>Jour 1</strong> : Les 5 Piliers de l'Islam</li>
+                                <li>📖 <strong>Jour 2</strong> : La Shahada</li>
+                                <li>🕌 <strong>Jour 3</strong> : La Salat</li>
+                                <li>💰 <strong>Jour 4</strong> : La Zakat</li>
+                                <li>🌙 <strong>Jour 5</strong> : Le Sawm</li>
+                                <li>🕋 <strong>Jour 6</strong> : Le Hajj</li>
+                            </ul>
+                            <div class="lesson-tip">🌟 20 questions t'attendent ! 65% pour réussir.</div>
+                        </div>
+                    `,
+                    quiz: {
+                        questions: [
+                            { question: "Combien y a-t-il de piliers en Islam ?", options: ["3", "4", "5", "6"], correct: 2 },
+                            { question: "Qu'est-ce que la Shahada ?", options: ["La prière", "La profession de foi", "Le jeûne", "Le pèlerinage"], correct: 1 },
+                            { question: "Combien de prières quotidiennes ?", options: ["3", "4", "5", "6"], correct: 2 },
+                            { question: "Quel pourcentage donne-t-on en Zakat ?", options: ["1%", "2.5%", "5%", "10%"], correct: 1 },
+                            { question: "Pendant quel mois jeûne-t-on ?", options: ["Muharram", "Ramadan", "Dhu al-Hijjah", "Rabi' al-Awwal"], correct: 1 },
+                            { question: "Où se trouve La Mecque ?", options: ["Arabie Saoudite", "Égypte", "Maroc", "Turquie"], correct: 0 },
+                            { question: "Le Sawm est le combien de pilier ?", options: ["2ème", "3ème", "4ème", "5ème"], correct: 2 },
+                            { question: "La Salat est le combien de pilier ?", options: ["1er", "2ème", "3ème", "4ème"], correct: 1 },
+                            { question: "Quelle prière est faite avant le lever du soleil ?", options: ["Dhuhr", "Fajr", "Asr", "Maghrib"], correct: 1 },
+                            { question: "Le Hajj est le combien de pilier ?", options: ["3ème", "4ème", "5ème", "6ème"], correct: 2 },
+                            { question: "Qu'apprend-on par le jeûne ?", options: ["La patience", "La paresse", "La colère", "La tristesse"], correct: 0 },
+                            { question: "À qui donne-t-on la Zakat ?", options: ["Aux riches", "Aux pauvres", "Aux non-musulmans", "À personne"], correct: 1 },
+                            { question: "Que signifie 'La ilaha illa Allah' ?", options: ["Dieu est grand", "Il n'y a de dieu qu'Allah", "Muhammad est le messager", "Allah est le seul"], correct: 1 },
+                            { question: "Quel vêtement portent les pèlerins ?", options: ["Coloré", "Blanc (Ihram)", "Costume", "Uniforme"], correct: 1 },
+                            { question: "Le Ramadan est quel mois ?", options: ["7ème", "8ème", "9ème", "10ème"], correct: 2 },
+                            { question: "Qui est le dernier prophète ?", options: ["Ibrahim", "Musa", "Muhammad", "Isa"], correct: 2 },
+                            { question: "La Zakat est le combien de pilier ?", options: ["1er", "2ème", "3ème", "4ème"], correct: 2 },
+                            { question: "Combien de rak'ahs a Maghrib ?", options: ["2", "3", "4", "5"], correct: 1 },
+                            { question: "Que signifie 'Muhammadan rasulu Allah' ?", options: ["Muhammad est aimé", "Muhammad est le messager", "Muhammad est le fils", "Muhammad est un prophète"], correct: 1 },
+                            { question: "Les 5 piliers sont-ils importants ?", options: ["Oui", "Non", "Parfois", "Seulement pour les hommes"], correct: 0 }
+                        ]
+                    }
+                }
+            }
+        };
+
+        // ============================================ //
+        // LOGIQUE DE LA PAGE //
         // ============================================ //
 
-        const SUBJECT_KEY = 'islam';
         const TOTAL_DAYS = 7;
+        const START_DATE = new Date('2026-07-14');
+        const TODAY = new Date();
 
-        // Fonction pour obtenir les données du sujet
-        function getSubjectData() {
-            if (typeof window.SUBJECTS !== 'undefined' && window.SUBJECTS[SUBJECT_KEY]) {
-                return window.SUBJECTS[SUBJECT_KEY];
-            }
-            // Fallback: utiliser DATA_ISLAM directement
-            if (typeof window.DATA_ISLAM !== 'undefined') {
-                return window.DATA_ISLAM;
-            }
-            return null;
+        function getCurrentDay() {
+            const start = new Date(START_DATE.getFullYear(), START_DATE.getMonth(), START_DATE.getDate());
+            const today = new Date(TODAY.getFullYear(), TODAY.getMonth(), TODAY.getDate());
+            const diffDays = Math.floor((today - start) / (1000 * 60 * 60 * 24));
+            if (diffDays < 0) return 1;
+            if (diffDays >= TOTAL_DAYS) return TOTAL_DAYS;
+            return diffDays + 1;
         }
 
-        // Attendre que les données soient chargées
-        function waitForData(callback) {
-            if (typeof window.SUBJECTS !== 'undefined' && window.SUBJECTS[SUBJECT_KEY]) {
-                callback();
-            } else if (typeof window.DATA_ISLAM !== 'undefined') {
-                // Créer SUBJECTS si nécessaire
-                if (typeof window.SUBJECTS === 'undefined') {
-                    window.SUBJECTS = {};
-                }
-                window.SUBJECTS.islam = window.DATA_ISLAM;
-                callback();
-            } else {
-                setTimeout(function() { waitForData(callback); }, 100);
-            }
+        function getTodayDate() {
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            return TODAY.toLocaleDateString('fr-FR', options);
         }
 
-        waitForData(function() {
-            console.log('✅ Données Islam chargées !');
-            initIslamPage();
-        });
+        function getDateForDay(dayNumber) {
+            const date = new Date(START_DATE);
+            date.setDate(date.getDate() + dayNumber - 1);
+            return date;
+        }
 
-        function initIslamPage() {
-            // Récupérer le jour actuel
-            const currentDay = typeof getCurrentDay === 'function' ? getCurrentDay() : 1;
-            let currentViewDay = currentDay;
+        function formatDate(date) {
+            const options = { day: 'numeric', month: 'long', year: 'numeric' };
+            return date.toLocaleDateString('fr-FR', options);
+        }
 
-            // Afficher la date
-            const dateEl = document.getElementById('current-date');
-            if (dateEl && typeof getTodayDate === 'function') {
-                dateEl.textContent = '📅 ' + getTodayDate();
+        // Progress
+        function getProgress() {
+            try {
+                const data = localStorage.getItem('monEcoleProgress');
+                return data ? JSON.parse(data) : {};
+            } catch { return {}; }
+        }
+
+        function saveProgress(progress) {
+            localStorage.setItem('monEcoleProgress', JSON.stringify(progress));
+        }
+
+        function getSubjectProgress() {
+            const progress = getProgress();
+            return progress.islam || { completedDays: [], scores: {} };
+        }
+
+        function updateSubjectProgress(dayNumber, score) {
+            const progress = getProgress();
+            if (!progress.islam) progress.islam = { completedDays: [], scores: {} };
+            if (!progress.islam.completedDays.includes(dayNumber)) {
+                progress.islam.completedDays.push(dayNumber);
             }
+            progress.islam.scores[dayNumber] = score;
+            saveProgress(progress);
+            return progress.islam;
+        }
 
-            // Fonction pour obtenir le progrès
-            function getProgress() {
-                if (typeof window.getSubjectProgress === 'function') {
-                    return window.getSubjectProgress(SUBJECT_KEY);
-                }
-                return { completedDays: [], scores: {} };
-            }
+        function isDayCompleted(dayNumber) {
+            const progress = getSubjectProgress();
+            return progress.completedDays.includes(dayNumber);
+        }
 
-            // RENDER LESSON
-            function renderLesson(dayNumber) {
-                const container = document.getElementById('lessonContainer');
-                const subjectData = getSubjectData();
-                
-                if (!subjectData || !subjectData.days || !subjectData.days[dayNumber]) {
-                    container.innerHTML = `
-                        <div class="message-box">
-                            <div class="big-emoji">📚</div>
-                            <h3>Leçon à venir</h3>
-                            <p>Reviens bientôt pour découvrir cette leçon !</p>
-                        </div>
-                    `;
-                    return;
-                }
+        function isDayUnlocked(dayNumber) {
+            return dayNumber <= getCurrentDay();
+        }
 
-                const dayData = subjectData.days[dayNumber];
-                const isCompleted = typeof isDayCompleted === 'function' ? isDayCompleted(SUBJECT_KEY, dayNumber) : false;
-                const isUnlocked = typeof isDayUnlocked === 'function' ? isDayUnlocked(SUBJECT_KEY, dayNumber) : (dayNumber <= getCurrentDay());
-                const date = getDateForDay ? getDateForDay(dayNumber) : new Date();
-                
-                let statusBadge = '';
-                if (isCompleted) {
-                    statusBadge = '✅ Terminé';
-                } else if (isUnlocked) {
-                    statusBadge = '🔵 À faire';
-                } else {
-                    statusBadge = '🔒 Verrouillé';
-                }
+        // ============================================ //
+        // RENDER //
+        // ============================================ //
 
+        let currentViewDay = getCurrentDay();
+
+        function renderLesson(dayNumber) {
+            const container = document.getElementById('lessonContainer');
+            const dayData = SUBJECT_DATA.days[dayNumber];
+            
+            if (!dayData) {
                 container.innerHTML = `
-                    <div class="day-badge">📅 Jour ${dayNumber} - ${formatDate(date)}</div>
-                    <div class="lesson-content">
-                        ${dayData.content}
-                        <div style="margin-top: 15px; font-size: 0.9rem; color: #636e72;">
-                            Statut: <strong>${statusBadge}</strong>
+                    <div class="message-box">
+                        <div class="big-emoji">📚</div>
+                        <h3>Leçon à venir</h3>
+                        <p>Reviens bientôt pour découvrir cette leçon !</p>
+                    </div>
+                `;
+                return;
+            }
+
+            const completed = isDayCompleted(dayNumber);
+            const unlocked = isDayUnlocked(dayNumber);
+            const date = getDateForDay(dayNumber);
+            
+            let statusBadge = '';
+            if (completed) statusBadge = '✅ Terminé';
+            else if (unlocked) statusBadge = '🔵 À faire';
+            else statusBadge = '🔒 Verrouillé';
+
+            container.innerHTML = `
+                <div class="day-badge">📅 Jour ${dayNumber} - ${formatDate(date)}</div>
+                <div class="lesson-content">
+                    ${dayData.content}
+                    <div style="margin-top: 15px; font-size: 0.9rem; color: #636e72;">
+                        Statut: <strong>${statusBadge}</strong>
+                    </div>
+                </div>
+            `;
+
+            const quizContainer = document.getElementById('quizContainer');
+            if (unlocked) {
+                quizContainer.classList.add('active');
+                renderQuiz(dayNumber);
+            } else {
+                quizContainer.classList.remove('active');
+            }
+
+            document.getElementById('prevDay').disabled = (dayNumber <= 1);
+            document.getElementById('nextDay').disabled = (dayNumber >= TOTAL_DAYS);
+        }
+
+        function renderQuiz(dayNumber) {
+            const container = document.getElementById('quizContainer');
+            const dayData = SUBJECT_DATA.days[dayNumber];
+            
+            if (!dayData || !dayData.quiz) {
+                container.innerHTML = `<p>Aucun quiz pour cette leçon.</p>`;
+                return;
+            }
+
+            const quiz = dayData.quiz;
+            const completed = isDayCompleted(dayNumber);
+
+            if (completed) {
+                const progress = getSubjectProgress();
+                const score = progress.scores[dayNumber] || 0;
+                container.innerHTML = `
+                    <h3>✅ Quiz terminé !</h3>
+                    <div class="quiz-result success" style="display:block;">
+                        🎉 Score: ${score}% - Bravo !
+                    </div>
+                    <p style="text-align:center; color:#636e72; margin-top:10px;">
+                        Tu peux réviser la leçon quand tu veux.
+                    </p>
+                `;
+                return;
+            }
+
+            let html = `<h3>📝 Quiz du Jour ${dayNumber}</h3>`;
+            html += `<p>Réponds aux ${quiz.questions.length} questions ci-dessous :</p>`;
+
+            quiz.questions.forEach((q, index) => {
+                html += `
+                    <div class="question" data-q="${index}">
+                        <p>${index + 1}. ${q.question}</p>
+                        <div class="options">
+                            ${q.options.map((opt, i) => `
+                                <label>
+                                    <input type="radio" name="q${index}" value="${i}">
+                                    ${opt}
+                                </label>
+                            `).join('')}
                         </div>
                     </div>
                 `;
+            });
 
-                // Afficher le quiz si débloqué
-                const quizContainer = document.getElementById('quizContainer');
-                if (isUnlocked) {
-                    quizContainer.classList.add('active');
-                    renderQuiz(dayNumber);
-                } else {
-                    quizContainer.classList.remove('active');
+            html += `
+                <button class="btn-submit" onclick="submitQuiz(${dayNumber})">✅ Vérifier mes réponses</button>
+                <div id="quizResult" class="quiz-result"></div>
+            `;
+
+            container.innerHTML = html;
+        }
+
+        window.submitQuiz = function(dayNumber) {
+            const dayData = SUBJECT_DATA.days[dayNumber];
+            if (!dayData || !dayData.quiz) return;
+
+            const quiz = dayData.quiz;
+            let correct = 0;
+            const total = quiz.questions.length;
+
+            quiz.questions.forEach((q, index) => {
+                const selected = document.querySelector(`input[name="q${index}"]:checked`);
+                if (selected && parseInt(selected.value) === q.correct) {
+                    correct++;
                 }
+            });
 
-                // Mettre à jour la navigation
-                document.getElementById('prevDay').disabled = (dayNumber <= 1);
-                document.getElementById('nextDay').disabled = (dayNumber >= TOTAL_DAYS);
+            const score = Math.round((correct / total) * 100);
+            const resultDiv = document.getElementById('quizResult');
+            
+            if (score >= 65) {
+                resultDiv.className = 'quiz-result success';
+                resultDiv.textContent = `🎉 Félicitations ! ${score}% - Quiz réussi !`;
+                updateSubjectProgress(dayNumber, score);
+                setTimeout(() => renderLesson(dayNumber), 1500);
+            } else {
+                resultDiv.className = 'quiz-result fail';
+                resultDiv.textContent = `📚 ${score}% - Réessaie ! Relis la leçon et retente ta chance.`;
             }
+        };
 
-            // RENDER QUIZ
-            function renderQuiz(dayNumber) {
-                const container = document.getElementById('quizContainer');
-                const subjectData = getSubjectData();
+        function renderWeekProgress() {
+            const container = document.getElementById('weekProgress');
+            let html = '';
+
+            for (let i = 1; i <= TOTAL_DAYS; i++) {
+                const completed = isDayCompleted(i);
+                const unlocked = isDayUnlocked(i);
                 
-                if (!subjectData || !subjectData.days || !subjectData.days[dayNumber] || !subjectData.days[dayNumber].quiz) {
-                    container.innerHTML = `<p>Aucun quiz pour cette leçon.</p>`;
-                    return;
-                }
+                let className = 'week-day';
+                if (completed) className += ' completed';
+                else if (unlocked) className += ' current';
+                else className += ' locked';
 
-                const quiz = subjectData.days[dayNumber].quiz;
-                const isCompleted = typeof isDayCompleted === 'function' ? isDayCompleted(SUBJECT_KEY, dayNumber) : false;
-
-                if (isCompleted) {
-                    const progress = getProgress();
-                    const score = progress.scores[dayNumber] || 0;
-                    container.innerHTML = `
-                        <h3>✅ Quiz terminé !</h3>
-                        <div class="quiz-result success" style="display:block;">
-                            🎉 Score: ${score}% - Bravo !
-                        </div>
-                        <p style="text-align:center; color:#636e72; margin-top:10px;">
-                            Tu peux réviser la leçon quand tu veux.
-                        </p>
-                    `;
-                    return;
-                }
-
-                let html = `<h3>📝 Quiz du Jour ${dayNumber}</h3>`;
-                html += `<p>Réponds aux 5 questions ci-dessous :</p>`;
-
-                quiz.questions.forEach((q, index) => {
-                    html += `
-                        <div class="question" data-q="${index}">
-                            <p>${index + 1}. ${q.question}</p>
-                            <div class="options">
-                                ${q.options.map((opt, i) => `
-                                    <label>
-                                        <input type="radio" name="q${index}" value="${i}">
-                                        ${opt}
-                                    </label>
-                                `).join('')}
-                            </div>
-                        </div>
-                    `;
-                });
-
-                html += `
-                    <button class="btn-submit" onclick="submitIslamQuiz(${dayNumber})">✅ Vérifier mes réponses</button>
-                    <div id="quizResult" class="quiz-result"></div>
-                `;
-
-                container.innerHTML = html;
+                const label = completed ? '✅' : (unlocked ? '📖' : '🔒');
+                html += `<div class="${className}">${label} J${i}</div>`;
             }
 
-            // SUBMIT QUIZ
-            window.submitIslamQuiz = function(dayNumber) {
-                const subjectData = getSubjectData();
-                if (!subjectData || !subjectData.days || !subjectData.days[dayNumber]) return;
+            container.innerHTML = html;
+        }
 
-                const quiz = subjectData.days[dayNumber].quiz;
-                let correct = 0;
-                const total = quiz.questions.length;
+        function updateProgressBar() {
+            const progress = getSubjectProgress();
+            const completed = progress.completedDays ? progress.completedDays.length : 0;
+            const percent = Math.round((completed / TOTAL_DAYS) * 100);
+            document.getElementById('subjectProgress').style.width = `${percent}%`;
+        }
 
-                quiz.questions.forEach((q, index) => {
-                    const selected = document.querySelector(`input[name="q${index}"]:checked`);
-                    if (selected && parseInt(selected.value) === q.correct) {
-                        correct++;
-                    }
-                });
+        function navigateToDay(direction) {
+            const newDay = currentViewDay + direction;
+            if (newDay < 1 || newDay > TOTAL_DAYS) return;
+            currentViewDay = newDay;
+            renderLesson(currentViewDay);
+            document.getElementById('prevDay').disabled = (currentViewDay <= 1);
+            document.getElementById('nextDay').disabled = (currentViewDay >= TOTAL_DAYS);
+        }
 
-                const score = Math.round((correct / total) * 100);
-                const resultDiv = document.getElementById('quizResult');
-                
-                if (score >= 65) {
-                    resultDiv.className = 'quiz-result success';
-                    resultDiv.textContent = `🎉 Félicitations ! ${score}% - Quiz réussi !`;
-                    if (typeof updateSubjectProgress === 'function') {
-                        updateSubjectProgress(SUBJECT_KEY, dayNumber, score);
-                    }
-                    if (typeof updateDashboard === 'function') {
-                        updateDashboard();
-                    }
-                    setTimeout(() => renderLesson(dayNumber), 1500);
-                } else {
-                    resultDiv.className = 'quiz-result fail';
-                    resultDiv.textContent = `📚 ${score}% - Réessaie ! Relis la leçon et retente ta chance.`;
-                }
-            };
+        // ============================================ //
+        // INITIALISATION //
+        // ============================================ //
 
-            // RENDER WEEK PROGRESS
-            function renderWeekProgress() {
-                const container = document.getElementById('weekProgress');
-                let html = '';
-
-                for (let i = 1; i <= TOTAL_DAYS; i++) {
-                    const completed = typeof isDayCompleted === 'function' ? isDayCompleted(SUBJECT_KEY, i) : false;
-                    const unlocked = typeof isDayUnlocked === 'function' ? isDayUnlocked(SUBJECT_KEY, i) : (i <= getCurrentDay());
-                    
-                    let className = 'week-day';
-                    if (completed) className += ' completed';
-                    else if (unlocked) className += ' current';
-                    else className += ' locked';
-
-                    const label = completed ? '✅' : (unlocked ? '📖' : '🔒');
-                    html += `<div class="${className}">${label} J${i}</div>`;
-                }
-
-                container.innerHTML = html;
-            }
-
-            // UPDATE PROGRESS BAR
-            function updateProgressBar() {
-                const progress = getProgress();
-                const completed = progress.completedDays ? progress.completedDays.length : 0;
-                const percent = Math.round((completed / TOTAL_DAYS) * 100);
-                
-                const bar = document.getElementById('subjectProgress');
-                if (bar) bar.style.width = `${percent}%`;
-            }
-
-            // NAVIGATION
-            function navigateToDay(direction) {
-                const newDay = currentViewDay + direction;
-                if (newDay < 1 || newDay > TOTAL_DAYS) return;
-                
-                currentViewDay = newDay;
-                renderLesson(currentViewDay);
-                updateNavigationButtons();
-            }
-
-            function updateNavigationButtons() {
-                document.getElementById('prevDay').disabled = (currentViewDay <= 1);
-                document.getElementById('nextDay').disabled = (currentViewDay >= TOTAL_DAYS);
-            }
-
-            // HELPER FUNCTIONS (si elles ne sont pas dans le scope global)
-            function getDateForDay(dayNumber) {
-                if (typeof window.getDateForDay === 'function') {
-                    return window.getDateForDay(dayNumber);
-                }
-                const date = new Date('2026-07-14');
-                date.setDate(date.getDate() + dayNumber - 1);
-                return date;
-            }
-
-            function formatDate(date) {
-                if (typeof window.formatDate === 'function') {
-                    return window.formatDate(date);
-                }
-                const options = { day: 'numeric', month: 'long', year: 'numeric' };
-                return date.toLocaleDateString('fr-FR', options);
-            }
-
-            function getCurrentDay() {
-                if (typeof window.getCurrentDay === 'function') {
-                    return window.getCurrentDay();
-                }
-                const start = new Date('2026-07-14');
-                const today = new Date();
-                const diffDays = Math.floor((today - start) / (1000 * 60 * 60 * 24));
-                if (diffDays < 0) return 1;
-                if (diffDays >= TOTAL_DAYS) return TOTAL_DAYS;
-                return diffDays + 1;
-            }
-
-            function getTodayDate() {
-                if (typeof window.getTodayDate === 'function') {
-                    return window.getTodayDate();
-                }
-                const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-                return new Date().toLocaleDateString('fr-FR', options);
-            }
-
-            function isDayCompleted(key, day) {
-                if (typeof window.isDayCompleted === 'function') {
-                    return window.isDayCompleted(key, day);
-                }
-                return false;
-            }
-
-            function isDayUnlocked(key, day) {
-                if (typeof window.isDayUnlocked === 'function') {
-                    return window.isDayUnlocked(key, day);
-                }
-                return day <= getCurrentDay();
-            }
-
-            function updateSubjectProgress(key, day, score) {
-                if (typeof window.updateSubjectProgress === 'function') {
-                    return window.updateSubjectProgress(key, day, score);
-                }
-                // Fallback: stockage local simple
-                try {
-                    const progress = JSON.parse(localStorage.getItem('monEcoleProgress') || '{}');
-                    if (!progress[key]) progress[key] = { completedDays: [], scores: {} };
-                    if (!progress[key].completedDays.includes(day)) {
-                        progress[key].completedDays.push(day);
-                    }
-                    progress[key].scores[day] = score;
-                    localStorage.setItem('monEcoleProgress', JSON.stringify(progress));
-                } catch(e) {}
-            }
-
-            function updateDashboard() {
-                if (typeof window.updateDashboard === 'function') {
-                    window.updateDashboard();
-                }
-            }
-
-            // INITIALISATION
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('current-date').textContent = '📅 ' + getTodayDate();
+            
             renderLesson(currentViewDay);
             renderWeekProgress();
             updateProgressBar();
-            updateNavigationButtons();
+            
+            document.getElementById('prevDay').disabled = (currentViewDay <= 1);
+            document.getElementById('nextDay').disabled = (currentViewDay >= TOTAL_DAYS);
 
-            // EVENT LISTENERS
             document.getElementById('prevDay').addEventListener('click', function() { navigateToDay(-1); });
             document.getElementById('nextDay').addEventListener('click', function() { navigateToDay(1); });
 
-            // Vérification si on est avant le début
-            const today = new Date();
-            const startDate = new Date('2026-07-14');
-            if (today < startDate) {
+            // Vérifier si on est avant le début
+            if (TODAY < START_DATE) {
                 document.getElementById('lessonContainer').innerHTML = `
                     <div class="message-box">
                         <div class="big-emoji">⏳</div>
@@ -822,8 +774,10 @@
                 document.getElementById('quizContainer').classList.remove('active');
             }
 
-            console.log('✅ Page Islam initialisée !');
-        }
+            console.log('✅ Page Islam chargée avec succès !');
+            console.log('📅 Aujourd\'hui:', getTodayDate());
+            console.log('📚 Jour actuel:', currentViewDay);
+        });
     </script>
 </body>
 </html>
