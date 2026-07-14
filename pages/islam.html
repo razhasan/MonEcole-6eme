@@ -4,9 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🕌 Éducation Islamique - Mon École</title>
+    <!-- CHEMIN CORRIGÉ : ../ pour remonter d'un niveau -->
     <link rel="stylesheet" href="../css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
+        /* ===== TOUS LES STYLES SONT ICI (pour éviter les problèmes de chargement) ===== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            color: #2d3436;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        
         .subject-header {
             background: linear-gradient(135deg, #6C63FF 0%, #5A52D5 100%);
             padding: 30px 20px;
@@ -14,6 +25,7 @@
             color: white;
             text-align: center;
             margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(108,99,255,0.3);
         }
         .subject-header h1 { font-size: 2.5rem; margin-bottom: 5px; }
         .subject-header .subtitle { font-size: 1.1rem; opacity: 0.9; }
@@ -36,7 +48,6 @@
             transition: all 0.3s;
         }
         .back-home:hover { background: rgba(255,255,255,0.3); transform: translateX(-3px); }
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
         
         .lesson-container {
             background: white;
@@ -257,6 +268,7 @@
 
     <header class="subject-header">
         <div class="container">
+            <!-- CHEMIN CORRIGÉ : ../ pour remonter à la racine -->
             <a href="../index.html" class="back-home">🏠 Retour à l'accueil</a>
             <h1>🕌 Éducation Islamique</h1>
             <p class="subtitle">Apprends les bases de l'Islam avec amour et bienveillance 💖</p>
