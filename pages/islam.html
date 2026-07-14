@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🕌 Éducation Islamique - Mon École</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Styles spécifiques à la page Islam */
+        .subject-header {
+            background: linear-gradient(135deg, #6C63FF 0%, #5A52D5 100%);
+            padding: 30px 20px;
+            border-radius: 0 0 30px 30px;
+            color: white;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .subject-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 5px;
+        }
+        
+        .subject-header .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .subject-header .date-info {
+            background: rgba(255,255,255,0.2);
+            padding: 8px 20px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-top: 10px;
+            font-weight: 600;
+        }
+        
+        .back-home {
+            display: inline-block;
+            color: white;
+            text-decoration: none;
+            background: rgba(255,255,255,0.2);
+            padding: 8px 20px;
+            border-radius: 20px;
+            margin-bottom: 10px;
+            transition: all 0.3s;
+        }
+        
+        .back-home:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateX(-3px);
+        }
+        
+        .lesson-container {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+            min-height: 300px;
+        }
+        
+        .lesson-container .day-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .lesson-container .lesson-content h3 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .lesson-container .lesson-content ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .lesson-container .lesson-content ul li {
+            padding: 10px 15px;
+            margin-bottom: 8px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .lesson-container .lesson-content .lesson-tip {
+            background: #fff3cd;
+            padding: 15px 20px;
+            border-radius: 12px;
+            margin-top: 15px;
+            border-left: 4px solid #ffc107;
+        }
+        
+        .lesson-container .lesson-content .arabic-text {
+            background: #f0f0f0;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 1.4rem;
+            margin: 15px 0;
+            direction: rtl;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        .lesson-container .lesson-content .arabic-text em {
+            display: block;
+            font-size: 1rem;
+            direction: ltr;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .navigation-buttons button {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 15px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Quicksand', sans-serif;
+            flex: 1;
+            min-width: 120px;
+        }
+        
+        .btn-prev {
+            background: #ecf0f1;
+            color: #2d3436;
+        }
+        
+        .btn-prev:hover:not(:disabled) {
+            background: #d5d8da;
+            transform: translateX(-3px);
+        }
+        
+        .btn-next {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-next:hover:not(:disabled) {
+            background: var(--primary-dark);
+            transform: translateX(3px);
+            box-shadow: 0 5px 20px rgba(108,99,255,0.3);
+        }
+        
+        .btn-next:disabled, .btn-prev:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+        
+        .quiz-container {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            margin-top: 20px;
+            display: none;
+        }
+        
+        .quiz-container.active {
+            display: block;
+            animation: fadeInUp 0.5s ease-out;
+        }
+        
+        .quiz-container h3 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .question {
+            margin-bottom: 25px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+        }
+        
+        .question p {
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 1.05rem;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .options label {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 15px;
+            background: white;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 2px solid transparent;
+        }
+        
+        .options label:hover {
+            border-color: var(--primary-light);
+            background: #f0edff;
+        }
+        
+        .options input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary);
+        }
+        
+        .btn-submit {
+            background: var(--success);
+            color: white;
+            padding: 12px 40px;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Quicksand', sans-serif;
+        }
+        
+        .btn-submit:hover {
+            transform: scale(1.03);
+            box-shadow: 0 5px 20px rgba(107,203,119,0.3);
+        }
+        
+        .quiz-result {
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            display: none;
+        }
+        
+        .quiz-result.success {
+            display: block;
+            background: #d4edda;
+            color: #155724;
+            border: 2px solid #6BCB77;
+        }
+        
+        .quiz-result.fail {
+            display: block;
+            background: #f8d7da;
+            color: #721c24;
+            border: 2px solid #FF6B6B;
+        }
+        
+        .progress-bar-container {
+            background: #ecf0f1;
+            border-radius: 15px;
+            height: 12px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        
+        .progress-bar-fill {
+            height: 100%;
+            border-radius: 15px;
+            background: linear-gradient(90deg, var(--primary-light), var(--primary));
+            transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            width: 0%;
+        }
+        
+        .weekly-quiz-container {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            border-radius: 20px;
+            padding: 30px;
+            margin-top: 20px;
+            display: none;
+            border: 3px solid #ff6b6b;
+        }
+        
+        .weekly-quiz-container.active {
+            display: block;
+            animation: fadeInUp 0.6s ease-out;
+        }
+        
+        .weekly-quiz-container h3 {
+            color: #e17055;
+            font-size: 1.8rem;
+            text-align: center;
+        }
+        
+        .weekly-quiz-container .subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #636e72;
+            margin-bottom: 20px;
+        }
+        
+        .weekly-quiz-container .passing-info {
+            background: white;
+            padding: 10px 20px;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        .week-progress {
+            display: flex;
+            justify-content: space-between;
+            gap: 8px;
+            margin: 20px 0;
+        }
+        
+        .week-day {
+            flex: 1;
+            text-align: center;
+            padding: 8px 4px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            background: #ecf0f1;
+            color: #999;
+            transition: all 0.3s;
+        }
+        
+        .week-day.completed {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .week-day.current {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .week-day.locked {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .message-box {
+            text-align: center;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+        
+        .message-box .big-emoji {
+            font-size: 4rem;
+        }
+        
+        .message-box h3 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin: 15px 0;
+        }
+        
+        .message-box p {
+            color: #636e72;
+            font-size: 1.1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .subject-header h1 { font-size: 2rem; }
+            .navigation-buttons button { padding: 10px 20px; font-size: 0.9rem; }
+            .lesson-container { padding: 20px; }
+            .quiz-container { padding: 20px; }
+            .week-day { font-size: 0.6rem; padding: 5px 2px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================ -->
+    <!-- HEADER -->
+    <!-- ============================================ -->
+    <header class="subject-header">
+        <div class="container">
+            <a href="../index.html" class="back-home">🏠 Retour à l'accueil</a>
+            <h1>🕌 Éducation Islamique</h1>
+            <p class="subtitle">Apprends les bases de l'Islam avec amour et bienveillance 💖</p>
+            <div class="date-info" id="current-date">📅 Chargement...</div>
+        </div>
+    </header>
+
+    <!-- ============================================ -->
+    <!-- MAIN CONTENT -->
+    <!-- ============================================ -->
+    <div class="container">
+
+        <!-- Progress Bar -->
+        <div class="progress-bar-container">
+            <div class="progress-bar-fill" id="subjectProgress" style="width: 0%;"></div>
+        </div>
+
+        <!-- Week Progress -->
+        <div class="week-progress" id="weekProgress">
+            <!-- Generated by JavaScript -->
+        </div>
+
+        <!-- ============================================ -->
+        <!-- LESSON CONTAINER -->
+        <!-- ============================================ -->
+        <div id="lessonContainer" class="lesson-container">
+            <!-- Dynamic content loaded by JavaScript -->
+        </div>
+
+        <!-- ============================================ -->
+        <!-- NAVIGATION -->
+        <!-- ============================================ -->
+        <div class="navigation-buttons">
+            <button class="btn-prev" id="prevDay" disabled>← Jour précédent</button>
+            <button class="btn-next" id="nextDay">Prochain jour →</button>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- QUIZ CONTAINER -->
+        <!-- ============================================ -->
+        <div id="quizContainer" class="quiz-container">
+            <!-- Dynamic quiz loaded by JavaScript -->
+        </div>
+
+        <!-- ============================================ -->
+        <!-- WEEKLY QUIZ CONTAINER -->
+        <!-- ============================================ -->
+        <div id="weeklyQuizContainer" class="weekly-quiz-container">
+            <!-- Dynamic weekly quiz loaded by JavaScript -->
+        </div>
+
+        <!-- ============================================ -->
+        <!-- MESSAGE BOX (for future lessons) -->
+        <!-- ============================================ -->
+        <div id="messageBox" style="display: none;">
+            <!-- Dynamic message -->
+        </div>
+
+    </div>
+
+    <!-- ============================================ -->
+    <!-- FOOTER -->
+    <!-- ============================================ -->
+    <footer>
+        <div class="container">
+            <p>💖 Fait avec amour pour ma fille bien-aimée 💖</p>
+            <p class="footer-small">🕌 Éducation Islamique - 6ème</p>
+        </div>
+    </footer>
+
+    <!-- ============================================ -->
+    <!-- JAVASCRIPT -->
+    <!-- ============================================ -->
+    <script src="../js/script.js"></script>
+    <script>
+        // ============================================ //
+        // ISLAM PAGE SPECIFIC LOGIC //
+        // ============================================ //
+
+        const SUBJECT_KEY = 'islam';
+        const TOTAL_DAYS = 7;
+
+        // Get current day from global function
+        const currentDay = window.getCurrentDay ? window.getCurrentDay() : 1;
+
+        // ============================================ //
+        // RENDER LESSON //
+        // ============================================ //
+
+        function renderLesson(dayNumber) {
+            const container = document.getElementById('lessonContainer');
+            const subjectData = window.SUBJECTS ? window.SUBJECTS[SUBJECT_KEY] : null;
+            
+            if (!subjectData || !subjectData.days[dayNumber]) {
+                container.innerHTML = `
+                    <div class="message-box">
+                        <div class="big-emoji">📚</div>
+                        <h3>Leçon à venir</h3>
+                        <p>Reviens bientôt pour découvrir cette leçon !</p>
+                    </div>
+                `;
+                return;
+            }
+
+            const dayData = subjectData.days[dayNumber];
+            const isCompleted = window.isDayCompleted ? window.isDayCompleted(SUBJECT_KEY, dayNumber) : false;
+            const isUnlocked = window.isDayUnlocked ? window.isDayUnlocked(SUBJECT_KEY, dayNumber) : (dayNumber <= currentDay);
+            const date = getDateForDay(dayNumber);
+            
+            // Build status badge
+            let statusBadge = '';
+            if (isCompleted) {
+                statusBadge = '✅ Terminé';
+            } else if (isUnlocked) {
+                statusBadge = '🔵 À faire';
+            } else {
+                statusBadge = '🔒 Verrouillé';
+            }
+
+            container.innerHTML = `
+                <div class="day-badge">📅 Jour ${dayNumber} - ${formatDate(date)}</div>
+                <div class="lesson-content">
+                    ${dayData.content}
+                    <div style="margin-top: 15px; font-size: 0.9rem; color: #636e72;">
+                        Statut: <strong>${statusBadge}</strong>
+                    </div>
+                </div>
+            `;
+
+            // Show quiz if unlocked
+            const quizContainer = document.getElementById('quizContainer');
+            if (isUnlocked) {
+                quizContainer.classList.add('active');
+                renderQuiz(dayNumber);
+            } else {
+                quizContainer.classList.remove('active');
+            }
+
+            // Update navigation
+            document.getElementById('prevDay').disabled = (dayNumber <= 1);
+            document.getElementById('nextDay').disabled = (dayNumber >= TOTAL_DAYS);
+        }
+
+        // ============================================ //
+        // RENDER QUIZ //
+        // ============================================ //
+
+        function renderQuiz(dayNumber) {
+            const container = document.getElementById('quizContainer');
+            const subjectData = window.SUBJECTS ? window.SUBJECTS[SUBJECT_KEY] : null;
+            
+            if (!subjectData || !subjectData.days[dayNumber] || !subjectData.days[dayNumber].quiz) {
+                container.innerHTML = `<p>Aucun quiz pour cette leçon.</p>`;
+                return;
+            }
+
+            const quiz = subjectData.days[dayNumber].quiz;
+            const isCompleted = window.isDayCompleted ? window.isDayCompleted(SUBJECT_KEY, dayNumber) : false;
+
+            if (isCompleted) {
+                const score = getSubjectProgress(SUBJECT_KEY).scores[dayNumber] || 0;
+                container.innerHTML = `
+                    <h3>✅ Quiz terminé !</h3>
+                    <div class="quiz-result success" style="display:block;">
+                        🎉 Score: ${score}% - Bravo !
+                    </div>
+                    <p style="text-align:center; color:#636e72; margin-top:10px;">
+                        Tu peux réviser la leçon quand tu veux.
+                    </p>
+                `;
+                return;
+            }
+
+            let html = `<h3>📝 Quiz du Jour ${dayNumber}</h3>`;
+            html += `<p>Réponds aux 5 questions ci-dessous :</p>`;
+
+            quiz.questions.forEach((q, index) => {
+                html += `
+                    <div class="question" data-q="${index}">
+                        <p>${index + 1}. ${q.question}</p>
+                        <div class="options">
+                            ${q.options.map((opt, i) => `
+                                <label>
+                                    <input type="radio" name="q${index}" value="${i}">
+                                    ${opt}
+                                </label>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            });
+
+            html += `
+                <button class="btn-submit" onclick="submitQuiz(${dayNumber})">✅ Vérifier mes réponses</button>
+                <div id="quizResult" class="quiz-result"></div>
+            `;
+
+            container.innerHTML = html;
+        }
+
+        // ============================================ //
+        // SUBMIT QUIZ //
+        // ============================================ //
+
+        window.submitQuiz = function(dayNumber) {
+            const subjectData = window.SUBJECTS ? window.SUBJECTS[SUBJECT_KEY] : null;
+            if (!subjectData || !subjectData.days[dayNumber]) return;
+
+            const quiz = subjectData.days[dayNumber].quiz;
+            let correct = 0;
+            const total = quiz.questions.length;
+
+            quiz.questions.forEach((q, index) => {
+                const selected = document.querySelector(`input[name="q${index}"]:checked`);
+                if (selected && parseInt(selected.value) === q.correct) {
+                    correct++;
+                }
+            });
+
+            const score = Math.round((correct / total) * 100);
+            const resultDiv = document.getElementById('quizResult');
+            
+            if (score >= 65) {
+                resultDiv.className = 'quiz-result success';
+                resultDiv.textContent = `🎉 Félicitations ! ${score}% - Quiz réussi !`;
+                // Save progress
+                if (window.updateSubjectProgress) {
+                    window.updateSubjectProgress(SUBJECT_KEY, dayNumber, score);
+                }
+                // Update dashboard
+                if (window.updateDashboard) {
+                    window.updateDashboard();
+                }
+                // Re-render to show completed state
+                setTimeout(() => renderLesson(dayNumber), 1500);
+            } else {
+                resultDiv.className = 'quiz-result fail';
+                resultDiv.textContent = `📚 ${score}% - Réessaie ! Relis la leçon et retente ta chance.`;
+            }
+        };
+
+        // ============================================ //
+        // RENDER WEEK PROGRESS //
+        // ============================================ //
+
+        function renderWeekProgress() {
+            const container = document.getElementById('weekProgress');
+            let html = '';
+
+            for (let i = 1; i <= TOTAL_DAYS; i++) {
+                const completed = window.isDayCompleted ? window.isDayCompleted(SUBJECT_KEY, i) : false;
+                const unlocked = window.isDayUnlocked ? window.isDayUnlocked(SUBJECT_KEY, i) : (i <= currentDay);
+                
+                let className = 'week-day';
+                if (completed) className += ' completed';
+                else if (unlocked) className += ' current';
+                else className += ' locked';
+
+                const label = completed ? '✅' : (unlocked ? '📖' : '🔒');
+                html += `<div class="${className}">${label} J${i}</div>`;
+            }
+
+            container.innerHTML = html;
+        }
+
+        // ============================================ //
+        // UPDATE PROGRESS BAR //
+        // ============================================ //
+
+        function updateProgressBar() {
+            const progress = window.getSubjectProgress ? window.getSubjectProgress(SUBJECT_KEY) : { completedDays: [] };
+            const completed = progress.completedDays ? progress.completedDays.length : 0;
+            const percent = Math.round((completed / TOTAL_DAYS) * 100);
+            
+            const bar = document.getElementById('subjectProgress');
+            if (bar) bar.style.width = `${percent}%`;
+        }
+
+        // ============================================ //
+        // NAVIGATION //
+        // ============================================ //
+
+        let currentViewDay = currentDay;
+
+        function navigateToDay(direction) {
+            const newDay = currentViewDay + direction;
+            if (newDay < 1 || newDay > TOTAL_DAYS) return;
+            
+            currentViewDay = newDay;
+            renderLesson(currentViewDay);
+            updateNavigationButtons();
+        }
+
+        function updateNavigationButtons() {
+            document.getElementById('prevDay').disabled = (currentViewDay <= 1);
+            document.getElementById('nextDay').disabled = (currentViewDay >= TOTAL_DAYS);
+        }
+
+        // ============================================ //
+        // HELPER FUNCTIONS (if not in global) //
+        // ============================================ //
+
+        function getDateForDay(dayNumber) {
+            const date = new Date('2026-07-14');
+            date.setDate(date.getDate() + dayNumber - 1);
+            return date;
+        }
+
+        function formatDate(date) {
+            const options = { day: 'numeric', month: 'long', year: 'numeric' };
+            return date.toLocaleDateString('fr-FR', options);
+        }
+
+        function getSubjectProgress(key) {
+            if (window.getSubjectProgress) return window.getSubjectProgress(key);
+            return { completedDays: [], scores: {} };
+        }
+
+        // ============================================ //
+        // INITIALIZATION //
+        // ============================================ //
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set current date
+            const dateEl = document.getElementById('current-date');
+            const today = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            if (dateEl) dateEl.textContent = `📅 ${today.toLocaleDateString('fr-FR', options)}`;
+
+            // Render initial lesson
+            renderLesson(currentViewDay);
+            renderWeekProgress();
+            updateProgressBar();
+            updateNavigationButtons();
+
+            // Event listeners
+            document.getElementById('prevDay').addEventListener('click', () => navigateToDay(-1));
+            document.getElementById('nextDay').addEventListener('click', () => navigateToDay(1));
+        });
+
+        // ============================================ //
+        // OVERRIDE DAY IF FUTURE DATE //
+        // ============================================ //
+
+        // If today is before start date or after week, adjust
+        const today = new Date();
+        const startDate = new Date('2026-07-14');
+        const endDate = new Date('2026-07-20');
+        
+        if (today < startDate) {
+            // Before start date
+            document.getElementById('lessonContainer').innerHTML = `
+                <div class="message-box">
+                    <div class="big-emoji">⏳</div>
+                    <h3>Les cours commencent le 14 juillet !</h3>
+                    <p>Reviens le 14 juillet pour commencer l'aventure ! 🌟</p>
+                </div>
+            `;
+            document.getElementById('quizContainer').classList.remove('active');
+        }
+    </script>
+</body>
+</html>
