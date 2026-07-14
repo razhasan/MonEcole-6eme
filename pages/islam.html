@@ -63,7 +63,7 @@
         
         .lesson-container .day-badge {
             display: inline-block;
-            background: var(--primary);
+            background: #6C63FF;
             color: white;
             padding: 5px 15px;
             border-radius: 20px;
@@ -73,7 +73,7 @@
         }
         
         .lesson-container .lesson-content h3 {
-            color: var(--primary);
+            color: #6C63FF;
             font-size: 1.5rem;
             margin-bottom: 15px;
         }
@@ -88,7 +88,7 @@
             margin-bottom: 8px;
             background: #f8f9fa;
             border-radius: 12px;
-            border-left: 4px solid var(--primary);
+            border-left: 4px solid #6C63FF;
         }
         
         .lesson-container .lesson-content .lesson-tip {
@@ -150,12 +150,12 @@
         }
         
         .btn-next {
-            background: var(--primary);
+            background: #6C63FF;
             color: white;
         }
         
         .btn-next:hover:not(:disabled) {
-            background: var(--primary-dark);
+            background: #5A52D5;
             transform: translateX(3px);
             box-shadow: 0 5px 20px rgba(108,99,255,0.3);
         }
@@ -181,7 +181,7 @@
         }
         
         .quiz-container h3 {
-            color: var(--primary);
+            color: #6C63FF;
             font-size: 1.5rem;
             margin-bottom: 20px;
         }
@@ -218,18 +218,18 @@
         }
         
         .options label:hover {
-            border-color: var(--primary-light);
+            border-color: #8B83FF;
             background: #f0edff;
         }
         
         .options input[type="radio"] {
             width: 18px;
             height: 18px;
-            accent-color: var(--primary);
+            accent-color: #6C63FF;
         }
         
         .btn-submit {
-            background: var(--success);
+            background: #6BCB77;
             color: white;
             padding: 12px 40px;
             border: none;
@@ -281,7 +281,7 @@
         .progress-bar-fill {
             height: 100%;
             border-radius: 15px;
-            background: linear-gradient(90deg, var(--primary-light), var(--primary));
+            background: linear-gradient(90deg, #8B83FF, #6C63FF);
             transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
             width: 0%;
         }
@@ -347,7 +347,7 @@
         }
         
         .week-day.current {
-            background: var(--primary);
+            background: #6C63FF;
             color: white;
         }
         
@@ -370,7 +370,7 @@
         
         .message-box h3 {
             font-size: 1.5rem;
-            color: var(--primary);
+            color: #6C63FF;
             margin: 15px 0;
         }
         
@@ -466,11 +466,9 @@
     </footer>
 
     <!-- ============================================ -->
-    <!-- JAVASCRIPT - ORDRE IMPORTANT ! -->
+    <!-- JAVASCRIPT -->
     <!-- ============================================ -->
-    <!-- 1. D'abord les DONNÉES de l'Islam -->
-    <script src="../js/data-islam.js"></script>
-    <!-- 2. Ensuite le SCRIPT PRINCIPAL (logique) -->
+    <!-- Le script principal contient TOUTES les données -->
     <script src="../js/script.js"></script>
     
     <!-- ============================================ -->
@@ -484,9 +482,28 @@
         const SUBJECT_KEY = 'islam';
         const TOTAL_DAYS = 7;
 
+        // Fonction pour obtenir les données du sujet
+        function getSubjectData() {
+            if (typeof window.SUBJECTS !== 'undefined' && window.SUBJECTS[SUBJECT_KEY]) {
+                return window.SUBJECTS[SUBJECT_KEY];
+            }
+            // Fallback: utiliser DATA_ISLAM directement
+            if (typeof window.DATA_ISLAM !== 'undefined') {
+                return window.DATA_ISLAM;
+            }
+            return null;
+        }
+
         // Attendre que les données soient chargées
         function waitForData(callback) {
-            if (typeof DATA_ISLAM !== 'undefined') {
+            if (typeof window.SUBJECTS !== 'undefined' && window.SUBJECTS[SUBJECT_KEY]) {
+                callback();
+            } else if (typeof window.DATA_ISLAM !== 'undefined') {
+                // Créer SUBJECTS si nécessaire
+                if (typeof window.SUBJECTS === 'undefined') {
+                    window.SUBJECTS = {};
+                }
+                window.SUBJECTS.islam = window.DATA_ISLAM;
                 callback();
             } else {
                 setTimeout(function() { waitForData(callback); }, 100);
@@ -495,13 +512,6 @@
 
         waitForData(function() {
             console.log('✅ Données Islam chargées !');
-            
-            // Initialiser les matières
-            if (typeof initSubjects === 'function') {
-                initSubjects();
-            }
-            
-            // Démarrer la page
             initIslamPage();
         });
 
@@ -514,18 +524,6 @@
             const dateEl = document.getElementById('current-date');
             if (dateEl && typeof getTodayDate === 'function') {
                 dateEl.textContent = '📅 ' + getTodayDate();
-            }
-
-            // Fonction pour obtenir les données du sujet
-            function getSubjectData() {
-                if (typeof window.SUBJECTS !== 'undefined' && window.SUBJECTS[SUBJECT_KEY]) {
-                    return window.SUBJECTS[SUBJECT_KEY];
-                }
-                // Fallback: utiliser DATA_ISLAM directement
-                if (typeof DATA_ISLAM !== 'undefined') {
-                    return DATA_ISLAM;
-                }
-                return null;
             }
 
             // Fonction pour obtenir le progrès
@@ -726,16 +724,78 @@
                 document.getElementById('nextDay').disabled = (currentViewDay >= TOTAL_DAYS);
             }
 
-            // HELPER FUNCTIONS
+            // HELPER FUNCTIONS (si elles ne sont pas dans le scope global)
             function getDateForDay(dayNumber) {
+                if (typeof window.getDateForDay === 'function') {
+                    return window.getDateForDay(dayNumber);
+                }
                 const date = new Date('2026-07-14');
                 date.setDate(date.getDate() + dayNumber - 1);
                 return date;
             }
 
             function formatDate(date) {
+                if (typeof window.formatDate === 'function') {
+                    return window.formatDate(date);
+                }
                 const options = { day: 'numeric', month: 'long', year: 'numeric' };
                 return date.toLocaleDateString('fr-FR', options);
+            }
+
+            function getCurrentDay() {
+                if (typeof window.getCurrentDay === 'function') {
+                    return window.getCurrentDay();
+                }
+                const start = new Date('2026-07-14');
+                const today = new Date();
+                const diffDays = Math.floor((today - start) / (1000 * 60 * 60 * 24));
+                if (diffDays < 0) return 1;
+                if (diffDays >= TOTAL_DAYS) return TOTAL_DAYS;
+                return diffDays + 1;
+            }
+
+            function getTodayDate() {
+                if (typeof window.getTodayDate === 'function') {
+                    return window.getTodayDate();
+                }
+                const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                return new Date().toLocaleDateString('fr-FR', options);
+            }
+
+            function isDayCompleted(key, day) {
+                if (typeof window.isDayCompleted === 'function') {
+                    return window.isDayCompleted(key, day);
+                }
+                return false;
+            }
+
+            function isDayUnlocked(key, day) {
+                if (typeof window.isDayUnlocked === 'function') {
+                    return window.isDayUnlocked(key, day);
+                }
+                return day <= getCurrentDay();
+            }
+
+            function updateSubjectProgress(key, day, score) {
+                if (typeof window.updateSubjectProgress === 'function') {
+                    return window.updateSubjectProgress(key, day, score);
+                }
+                // Fallback: stockage local simple
+                try {
+                    const progress = JSON.parse(localStorage.getItem('monEcoleProgress') || '{}');
+                    if (!progress[key]) progress[key] = { completedDays: [], scores: {} };
+                    if (!progress[key].completedDays.includes(day)) {
+                        progress[key].completedDays.push(day);
+                    }
+                    progress[key].scores[day] = score;
+                    localStorage.setItem('monEcoleProgress', JSON.stringify(progress));
+                } catch(e) {}
+            }
+
+            function updateDashboard() {
+                if (typeof window.updateDashboard === 'function') {
+                    window.updateDashboard();
+                }
             }
 
             // INITIALISATION
