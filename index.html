@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏫 Mon École - 6ème</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- ============================================ -->
+    <!-- HEADER -->
+    <!-- ============================================ -->
+    <header class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>🏫 Mon École</h1>
+                <p class="subtitle">Bienvenue ma chérie ! 🎀</p>
+                <p class="description">Prépare-toi pour une aventure extraordinaire en 6ème !</p>
+                <div class="date-display" id="today-date">
+                    📅 <span id="date-text">Chargement...</span>
+                </div>
+            </div>
+            <div class="hero-emoji">
+                <span class="floating-emoji">🌟</span>
+                <span class="floating-emoji">📚</span>
+                <span class="floating-emoji">🎓</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================ -->
+    <!-- PROGRESS DASHBOARD -->
+    <!-- ============================================ -->
+    <section class="dashboard">
+        <div class="container">
+            <h2 class="section-title">📊 Mon Progrès</h2>
+            
+            <div class="dashboard-grid">
+                <!-- PIE CHART -->
+                <div class="chart-card">
+                    <h3>Progrès Global</h3>
+                    <div class="chart-container">
+                        <canvas id="progressChart" width="200" height="200"></canvas>
+                    </div>
+                    <p class="chart-label">Progrès: <span id="globalProgress">0%</span></p>
+                </div>
+                
+                <!-- STATS CARDS -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <span class="stat-icon">📚</span>
+                        <div class="stat-info">
+                            <span class="stat-number" id="totalDays">0</span>
+                            <span class="stat-label">Jours complétés</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-icon">🏆</span>
+                        <div class="stat-info">
+                            <span class="stat-number" id="passedQuizzes">0</span>
+                            <span class="stat-label">Quiz réussis</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-icon">⭐</span>
+                        <div class="stat-info">
+                            <span class="stat-number" id="avgScore">0%</span>
+                            <span class="stat-label">Moyenne générale</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-icon">🎯</span>
+                        <div class="stat-info">
+                            <span class="stat-number" id="subjectsCompleted">0</span>
+                            <span class="stat-label">Matières terminées</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- SUBJECTS GAUGES -->
+    <!-- ============================================ -->
+    <section class="subjects">
+        <div class="container">
+            <h2 class="section-title">📖 Mes Matières</h2>
+            
+            <div class="subject-grid">
+                <!-- Islam -->
+                <div class="subject-card" onclick="goToSubject('islam')">
+                    <div class="subject-icon">🕌</div>
+                    <h3>Éducation Islamique</h3>
+                    <p class="subject-desc">Apprends les bases de l'Islam</p>
+                    <div class="gauge-container">
+                        <div class="gauge-track">
+                            <div class="gauge-fill" id="gauge-islam" style="width: 0%"></div>
+                        </div>
+                        <span class="gauge-percent" id="percent-islam">0%</span>
+                    </div>
+                    <span class="subject-status" id="status-islam">🔒 Non commencé</span>
+                    <span class="subject-arrow">→</span>
+                </div>
+
+                <!-- Maths -->
+                <div class="subject-card" onclick="goToSubject('maths')">
+                    <div class="subject-icon">📐</div>
+                    <h3>Mathématiques</h3>
+                    <p class="subject-desc">Les nombres et les formes</p>
+                    <div class="gauge-container">
+                        <div class="gauge-track">
+                            <div class="gauge-fill" id="gauge-maths" style="width: 0%"></div>
+                        </div>
+                        <span class="gauge-percent" id="percent-maths">0%</span>
+                    </div>
+                    <span class="subject-status" id="status-maths">🔒 Non commencé</span>
+                    <span class="subject-arrow">→</span>
+                </div>
+
+                <!-- Français -->
+                <div class="subject-card" onclick="goToSubject('francais')">
+                    <div class="subject-icon">📖</div>
+                    <h3>Français</h3>
+                    <p class="subject-desc">La langue française</p>
+                    <div class="gauge-container">
+                        <div class="gauge-track">
+                            <div class="gauge-fill" id="gauge-francais" style="width: 0%"></div>
+                        </div>
+                        <span class="gauge-percent" id="percent-francais">0%</span>
+                    </div>
+                    <span class="subject-status" id="status-francais">🔒 Non commencé</span>
+                    <span class="subject-arrow">→</span>
+                </div>
+
+                <!-- Sciences -->
+                <div class="subject-card" onclick="goToSubject('sciences')">
+                    <div class="subject-icon">🔬</div>
+                    <h3>Sciences</h3>
+                    <p class="subject-desc">Découvre le monde</p>
+                    <div class="gauge-container">
+                        <div class="gauge-track">
+                            <div class="gauge-fill" id="gauge-sciences" style="width: 0%"></div>
+                        </div>
+                        <span class="gauge-percent" id="percent-sciences">0%</span>
+                    </div>
+                    <span class="subject-status" id="status-sciences">🔒 Non commencé</span>
+                    <span class="subject-arrow">→</span>
+                </div>
+
+                <!-- Histoire -->
+                <div class="subject-card" onclick="goToSubject('histoire')">
+                    <div class="subject-icon">🌍</div>
+                    <h3>Histoire-Géographie</h3>
+                    <p class="subject-desc">Voyage à travers le temps</p>
+                    <div class="gauge-container">
+                        <div class="gauge-track">
+                            <div class="gauge-fill" id="gauge-histoire" style="width: 0%"></div>
+                        </div>
+                        <span class="gauge-percent" id="percent-histoire">0%</span>
+                    </div>
+                    <span class="subject-status" id="status-histoire">🔒 Non commencé</span>
+                    <span class="subject-arrow">→</span>
+                </div>
+
+                <!-- Anglais -->
+                <div class="subject-card" onclick="goToSubject('anglais')">
+                    <div class="subject-icon">💬</div>
+                    <h3>Anglais</h3>
+                    <p class="subject-desc">Learn English!</p>
+                    <div class="gauge-container">
+                        <div class="gauge-track">
+                            <div class="gauge-fill" id="gauge-anglais" style="width: 0%"></div>
+                        </div>
+                        <span class="gauge-percent" id="percent-anglais">0%</span>
+                    </div>
+                    <span class="subject-status" id="status-anglais">🔒 Non commencé</span>
+                    <span class="subject-arrow">→</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- DAILY MOTIVATION -->
+    <!-- ============================================ -->
+    <section class="motivation">
+        <div class="container">
+            <div class="motivation-card">
+                <span class="motivation-emoji">💪</span>
+                <p id="daily-message">"Chaque jour est une nouvelle opportunité d'apprendre !"</p>
+                <span class="motivation-author">- 🌟</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- FOOTER -->
+    <!-- ============================================ -->
+    <footer>
+        <div class="container">
+            <p>💖 Fait avec amour pour ma fille bien-aimée 💖</p>
+            <p class="footer-small">© 2026 Mon École - 6ème</p>
+        </div>
+    </footer>
+
+    <!-- ============================================ -->
+    <!-- JAVASCRIPT -->
+    <!-- ============================================ -->
+    <script src="js/script.js"></script>
+</body>
+</html>
