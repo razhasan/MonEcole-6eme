@@ -447,7 +447,7 @@
         </div>
 
         <!-- ============================================ -->
-        <!-- MESSAGE BOX (for future lessons) -->
+        <!-- MESSAGE BOX -->
         <!-- ============================================ -->
         <div id="messageBox" style="display: none;">
             <!-- Dynamic message -->
@@ -466,294 +466,303 @@
     </footer>
 
     <!-- ============================================ -->
-    <!-- JAVASCRIPT -->
+    <!-- JAVASCRIPT - ORDRE IMPORTANT ! -->
     <!-- ============================================ -->
+    <!-- 1. D'abord les DONNÉES de l'Islam -->
+    <script src="../js/data-islam.js"></script>
+    <!-- 2. Ensuite le SCRIPT PRINCIPAL (logique) -->
     <script src="../js/script.js"></script>
+    
+    <!-- ============================================ -->
+    <!-- SCRIPT SPÉCIFIQUE POUR LA PAGE ISLAM -->
+    <!-- ============================================ -->
     <script>
         // ============================================ //
-        // ISLAM PAGE SPECIFIC LOGIC //
+        // PAGE ISLAM - LOGIQUE SPÉCIFIQUE
         // ============================================ //
 
         const SUBJECT_KEY = 'islam';
         const TOTAL_DAYS = 7;
 
-        // Get current day from global function
-        const currentDay = window.getCurrentDay ? window.getCurrentDay() : 1;
-
-        // ============================================ //
-        // RENDER LESSON //
-        // ============================================ //
-
-        function renderLesson(dayNumber) {
-            const container = document.getElementById('lessonContainer');
-            const subjectData = window.SUBJECTS ? window.SUBJECTS[SUBJECT_KEY] : null;
-            
-            if (!subjectData || !subjectData.days[dayNumber]) {
-                container.innerHTML = `
-                    <div class="message-box">
-                        <div class="big-emoji">📚</div>
-                        <h3>Leçon à venir</h3>
-                        <p>Reviens bientôt pour découvrir cette leçon !</p>
-                    </div>
-                `;
-                return;
-            }
-
-            const dayData = subjectData.days[dayNumber];
-            const isCompleted = window.isDayCompleted ? window.isDayCompleted(SUBJECT_KEY, dayNumber) : false;
-            const isUnlocked = window.isDayUnlocked ? window.isDayUnlocked(SUBJECT_KEY, dayNumber) : (dayNumber <= currentDay);
-            const date = getDateForDay(dayNumber);
-            
-            // Build status badge
-            let statusBadge = '';
-            if (isCompleted) {
-                statusBadge = '✅ Terminé';
-            } else if (isUnlocked) {
-                statusBadge = '🔵 À faire';
+        // Attendre que les données soient chargées
+        function waitForData(callback) {
+            if (typeof DATA_ISLAM !== 'undefined') {
+                callback();
             } else {
-                statusBadge = '🔒 Verrouillé';
+                setTimeout(function() { waitForData(callback); }, 100);
             }
-
-            container.innerHTML = `
-                <div class="day-badge">📅 Jour ${dayNumber} - ${formatDate(date)}</div>
-                <div class="lesson-content">
-                    ${dayData.content}
-                    <div style="margin-top: 15px; font-size: 0.9rem; color: #636e72;">
-                        Statut: <strong>${statusBadge}</strong>
-                    </div>
-                </div>
-            `;
-
-            // Show quiz if unlocked
-            const quizContainer = document.getElementById('quizContainer');
-            if (isUnlocked) {
-                quizContainer.classList.add('active');
-                renderQuiz(dayNumber);
-            } else {
-                quizContainer.classList.remove('active');
-            }
-
-            // Update navigation
-            document.getElementById('prevDay').disabled = (dayNumber <= 1);
-            document.getElementById('nextDay').disabled = (dayNumber >= TOTAL_DAYS);
         }
 
-        // ============================================ //
-        // RENDER QUIZ //
-        // ============================================ //
-
-        function renderQuiz(dayNumber) {
-            const container = document.getElementById('quizContainer');
-            const subjectData = window.SUBJECTS ? window.SUBJECTS[SUBJECT_KEY] : null;
+        waitForData(function() {
+            console.log('✅ Données Islam chargées !');
             
-            if (!subjectData || !subjectData.days[dayNumber] || !subjectData.days[dayNumber].quiz) {
-                container.innerHTML = `<p>Aucun quiz pour cette leçon.</p>`;
-                return;
+            // Initialiser les matières
+            if (typeof initSubjects === 'function') {
+                initSubjects();
+            }
+            
+            // Démarrer la page
+            initIslamPage();
+        });
+
+        function initIslamPage() {
+            // Récupérer le jour actuel
+            const currentDay = typeof getCurrentDay === 'function' ? getCurrentDay() : 1;
+            let currentViewDay = currentDay;
+
+            // Afficher la date
+            const dateEl = document.getElementById('current-date');
+            if (dateEl && typeof getTodayDate === 'function') {
+                dateEl.textContent = '📅 ' + getTodayDate();
             }
 
-            const quiz = subjectData.days[dayNumber].quiz;
-            const isCompleted = window.isDayCompleted ? window.isDayCompleted(SUBJECT_KEY, dayNumber) : false;
+            // Fonction pour obtenir les données du sujet
+            function getSubjectData() {
+                if (typeof window.SUBJECTS !== 'undefined' && window.SUBJECTS[SUBJECT_KEY]) {
+                    return window.SUBJECTS[SUBJECT_KEY];
+                }
+                // Fallback: utiliser DATA_ISLAM directement
+                if (typeof DATA_ISLAM !== 'undefined') {
+                    return DATA_ISLAM;
+                }
+                return null;
+            }
 
-            if (isCompleted) {
-                const score = getSubjectProgress(SUBJECT_KEY).scores[dayNumber] || 0;
+            // Fonction pour obtenir le progrès
+            function getProgress() {
+                if (typeof window.getSubjectProgress === 'function') {
+                    return window.getSubjectProgress(SUBJECT_KEY);
+                }
+                return { completedDays: [], scores: {} };
+            }
+
+            // RENDER LESSON
+            function renderLesson(dayNumber) {
+                const container = document.getElementById('lessonContainer');
+                const subjectData = getSubjectData();
+                
+                if (!subjectData || !subjectData.days || !subjectData.days[dayNumber]) {
+                    container.innerHTML = `
+                        <div class="message-box">
+                            <div class="big-emoji">📚</div>
+                            <h3>Leçon à venir</h3>
+                            <p>Reviens bientôt pour découvrir cette leçon !</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                const dayData = subjectData.days[dayNumber];
+                const isCompleted = typeof isDayCompleted === 'function' ? isDayCompleted(SUBJECT_KEY, dayNumber) : false;
+                const isUnlocked = typeof isDayUnlocked === 'function' ? isDayUnlocked(SUBJECT_KEY, dayNumber) : (dayNumber <= getCurrentDay());
+                const date = getDateForDay ? getDateForDay(dayNumber) : new Date();
+                
+                let statusBadge = '';
+                if (isCompleted) {
+                    statusBadge = '✅ Terminé';
+                } else if (isUnlocked) {
+                    statusBadge = '🔵 À faire';
+                } else {
+                    statusBadge = '🔒 Verrouillé';
+                }
+
                 container.innerHTML = `
-                    <h3>✅ Quiz terminé !</h3>
-                    <div class="quiz-result success" style="display:block;">
-                        🎉 Score: ${score}% - Bravo !
-                    </div>
-                    <p style="text-align:center; color:#636e72; margin-top:10px;">
-                        Tu peux réviser la leçon quand tu veux.
-                    </p>
-                `;
-                return;
-            }
-
-            let html = `<h3>📝 Quiz du Jour ${dayNumber}</h3>`;
-            html += `<p>Réponds aux 5 questions ci-dessous :</p>`;
-
-            quiz.questions.forEach((q, index) => {
-                html += `
-                    <div class="question" data-q="${index}">
-                        <p>${index + 1}. ${q.question}</p>
-                        <div class="options">
-                            ${q.options.map((opt, i) => `
-                                <label>
-                                    <input type="radio" name="q${index}" value="${i}">
-                                    ${opt}
-                                </label>
-                            `).join('')}
+                    <div class="day-badge">📅 Jour ${dayNumber} - ${formatDate(date)}</div>
+                    <div class="lesson-content">
+                        ${dayData.content}
+                        <div style="margin-top: 15px; font-size: 0.9rem; color: #636e72;">
+                            Statut: <strong>${statusBadge}</strong>
                         </div>
                     </div>
                 `;
-            });
 
-            html += `
-                <button class="btn-submit" onclick="submitQuiz(${dayNumber})">✅ Vérifier mes réponses</button>
-                <div id="quizResult" class="quiz-result"></div>
-            `;
-
-            container.innerHTML = html;
-        }
-
-        // ============================================ //
-        // SUBMIT QUIZ //
-        // ============================================ //
-
-        window.submitQuiz = function(dayNumber) {
-            const subjectData = window.SUBJECTS ? window.SUBJECTS[SUBJECT_KEY] : null;
-            if (!subjectData || !subjectData.days[dayNumber]) return;
-
-            const quiz = subjectData.days[dayNumber].quiz;
-            let correct = 0;
-            const total = quiz.questions.length;
-
-            quiz.questions.forEach((q, index) => {
-                const selected = document.querySelector(`input[name="q${index}"]:checked`);
-                if (selected && parseInt(selected.value) === q.correct) {
-                    correct++;
+                // Afficher le quiz si débloqué
+                const quizContainer = document.getElementById('quizContainer');
+                if (isUnlocked) {
+                    quizContainer.classList.add('active');
+                    renderQuiz(dayNumber);
+                } else {
+                    quizContainer.classList.remove('active');
                 }
-            });
 
-            const score = Math.round((correct / total) * 100);
-            const resultDiv = document.getElementById('quizResult');
-            
-            if (score >= 65) {
-                resultDiv.className = 'quiz-result success';
-                resultDiv.textContent = `🎉 Félicitations ! ${score}% - Quiz réussi !`;
-                // Save progress
-                if (window.updateSubjectProgress) {
-                    window.updateSubjectProgress(SUBJECT_KEY, dayNumber, score);
-                }
-                // Update dashboard
-                if (window.updateDashboard) {
-                    window.updateDashboard();
-                }
-                // Re-render to show completed state
-                setTimeout(() => renderLesson(dayNumber), 1500);
-            } else {
-                resultDiv.className = 'quiz-result fail';
-                resultDiv.textContent = `📚 ${score}% - Réessaie ! Relis la leçon et retente ta chance.`;
+                // Mettre à jour la navigation
+                document.getElementById('prevDay').disabled = (dayNumber <= 1);
+                document.getElementById('nextDay').disabled = (dayNumber >= TOTAL_DAYS);
             }
-        };
 
-        // ============================================ //
-        // RENDER WEEK PROGRESS //
-        // ============================================ //
-
-        function renderWeekProgress() {
-            const container = document.getElementById('weekProgress');
-            let html = '';
-
-            for (let i = 1; i <= TOTAL_DAYS; i++) {
-                const completed = window.isDayCompleted ? window.isDayCompleted(SUBJECT_KEY, i) : false;
-                const unlocked = window.isDayUnlocked ? window.isDayUnlocked(SUBJECT_KEY, i) : (i <= currentDay);
+            // RENDER QUIZ
+            function renderQuiz(dayNumber) {
+                const container = document.getElementById('quizContainer');
+                const subjectData = getSubjectData();
                 
-                let className = 'week-day';
-                if (completed) className += ' completed';
-                else if (unlocked) className += ' current';
-                else className += ' locked';
+                if (!subjectData || !subjectData.days || !subjectData.days[dayNumber] || !subjectData.days[dayNumber].quiz) {
+                    container.innerHTML = `<p>Aucun quiz pour cette leçon.</p>`;
+                    return;
+                }
 
-                const label = completed ? '✅' : (unlocked ? '📖' : '🔒');
-                html += `<div class="${className}">${label} J${i}</div>`;
+                const quiz = subjectData.days[dayNumber].quiz;
+                const isCompleted = typeof isDayCompleted === 'function' ? isDayCompleted(SUBJECT_KEY, dayNumber) : false;
+
+                if (isCompleted) {
+                    const progress = getProgress();
+                    const score = progress.scores[dayNumber] || 0;
+                    container.innerHTML = `
+                        <h3>✅ Quiz terminé !</h3>
+                        <div class="quiz-result success" style="display:block;">
+                            🎉 Score: ${score}% - Bravo !
+                        </div>
+                        <p style="text-align:center; color:#636e72; margin-top:10px;">
+                            Tu peux réviser la leçon quand tu veux.
+                        </p>
+                    `;
+                    return;
+                }
+
+                let html = `<h3>📝 Quiz du Jour ${dayNumber}</h3>`;
+                html += `<p>Réponds aux 5 questions ci-dessous :</p>`;
+
+                quiz.questions.forEach((q, index) => {
+                    html += `
+                        <div class="question" data-q="${index}">
+                            <p>${index + 1}. ${q.question}</p>
+                            <div class="options">
+                                ${q.options.map((opt, i) => `
+                                    <label>
+                                        <input type="radio" name="q${index}" value="${i}">
+                                        ${opt}
+                                    </label>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `;
+                });
+
+                html += `
+                    <button class="btn-submit" onclick="submitIslamQuiz(${dayNumber})">✅ Vérifier mes réponses</button>
+                    <div id="quizResult" class="quiz-result"></div>
+                `;
+
+                container.innerHTML = html;
             }
 
-            container.innerHTML = html;
-        }
+            // SUBMIT QUIZ
+            window.submitIslamQuiz = function(dayNumber) {
+                const subjectData = getSubjectData();
+                if (!subjectData || !subjectData.days || !subjectData.days[dayNumber]) return;
 
-        // ============================================ //
-        // UPDATE PROGRESS BAR //
-        // ============================================ //
+                const quiz = subjectData.days[dayNumber].quiz;
+                let correct = 0;
+                const total = quiz.questions.length;
 
-        function updateProgressBar() {
-            const progress = window.getSubjectProgress ? window.getSubjectProgress(SUBJECT_KEY) : { completedDays: [] };
-            const completed = progress.completedDays ? progress.completedDays.length : 0;
-            const percent = Math.round((completed / TOTAL_DAYS) * 100);
-            
-            const bar = document.getElementById('subjectProgress');
-            if (bar) bar.style.width = `${percent}%`;
-        }
+                quiz.questions.forEach((q, index) => {
+                    const selected = document.querySelector(`input[name="q${index}"]:checked`);
+                    if (selected && parseInt(selected.value) === q.correct) {
+                        correct++;
+                    }
+                });
 
-        // ============================================ //
-        // NAVIGATION //
-        // ============================================ //
+                const score = Math.round((correct / total) * 100);
+                const resultDiv = document.getElementById('quizResult');
+                
+                if (score >= 65) {
+                    resultDiv.className = 'quiz-result success';
+                    resultDiv.textContent = `🎉 Félicitations ! ${score}% - Quiz réussi !`;
+                    if (typeof updateSubjectProgress === 'function') {
+                        updateSubjectProgress(SUBJECT_KEY, dayNumber, score);
+                    }
+                    if (typeof updateDashboard === 'function') {
+                        updateDashboard();
+                    }
+                    setTimeout(() => renderLesson(dayNumber), 1500);
+                } else {
+                    resultDiv.className = 'quiz-result fail';
+                    resultDiv.textContent = `📚 ${score}% - Réessaie ! Relis la leçon et retente ta chance.`;
+                }
+            };
 
-        let currentViewDay = currentDay;
+            // RENDER WEEK PROGRESS
+            function renderWeekProgress() {
+                const container = document.getElementById('weekProgress');
+                let html = '';
 
-        function navigateToDay(direction) {
-            const newDay = currentViewDay + direction;
-            if (newDay < 1 || newDay > TOTAL_DAYS) return;
-            
-            currentViewDay = newDay;
-            renderLesson(currentViewDay);
-            updateNavigationButtons();
-        }
+                for (let i = 1; i <= TOTAL_DAYS; i++) {
+                    const completed = typeof isDayCompleted === 'function' ? isDayCompleted(SUBJECT_KEY, i) : false;
+                    const unlocked = typeof isDayUnlocked === 'function' ? isDayUnlocked(SUBJECT_KEY, i) : (i <= getCurrentDay());
+                    
+                    let className = 'week-day';
+                    if (completed) className += ' completed';
+                    else if (unlocked) className += ' current';
+                    else className += ' locked';
 
-        function updateNavigationButtons() {
-            document.getElementById('prevDay').disabled = (currentViewDay <= 1);
-            document.getElementById('nextDay').disabled = (currentViewDay >= TOTAL_DAYS);
-        }
+                    const label = completed ? '✅' : (unlocked ? '📖' : '🔒');
+                    html += `<div class="${className}">${label} J${i}</div>`;
+                }
 
-        // ============================================ //
-        // HELPER FUNCTIONS (if not in global) //
-        // ============================================ //
+                container.innerHTML = html;
+            }
 
-        function getDateForDay(dayNumber) {
-            const date = new Date('2026-07-14');
-            date.setDate(date.getDate() + dayNumber - 1);
-            return date;
-        }
+            // UPDATE PROGRESS BAR
+            function updateProgressBar() {
+                const progress = getProgress();
+                const completed = progress.completedDays ? progress.completedDays.length : 0;
+                const percent = Math.round((completed / TOTAL_DAYS) * 100);
+                
+                const bar = document.getElementById('subjectProgress');
+                if (bar) bar.style.width = `${percent}%`;
+            }
 
-        function formatDate(date) {
-            const options = { day: 'numeric', month: 'long', year: 'numeric' };
-            return date.toLocaleDateString('fr-FR', options);
-        }
+            // NAVIGATION
+            function navigateToDay(direction) {
+                const newDay = currentViewDay + direction;
+                if (newDay < 1 || newDay > TOTAL_DAYS) return;
+                
+                currentViewDay = newDay;
+                renderLesson(currentViewDay);
+                updateNavigationButtons();
+            }
 
-        function getSubjectProgress(key) {
-            if (window.getSubjectProgress) return window.getSubjectProgress(key);
-            return { completedDays: [], scores: {} };
-        }
+            function updateNavigationButtons() {
+                document.getElementById('prevDay').disabled = (currentViewDay <= 1);
+                document.getElementById('nextDay').disabled = (currentViewDay >= TOTAL_DAYS);
+            }
 
-        // ============================================ //
-        // INITIALIZATION //
-        // ============================================ //
+            // HELPER FUNCTIONS
+            function getDateForDay(dayNumber) {
+                const date = new Date('2026-07-14');
+                date.setDate(date.getDate() + dayNumber - 1);
+                return date;
+            }
 
-        document.addEventListener('DOMContentLoaded', function() {
-            // Set current date
-            const dateEl = document.getElementById('current-date');
-            const today = new Date();
-            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            if (dateEl) dateEl.textContent = `📅 ${today.toLocaleDateString('fr-FR', options)}`;
+            function formatDate(date) {
+                const options = { day: 'numeric', month: 'long', year: 'numeric' };
+                return date.toLocaleDateString('fr-FR', options);
+            }
 
-            // Render initial lesson
+            // INITIALISATION
             renderLesson(currentViewDay);
             renderWeekProgress();
             updateProgressBar();
             updateNavigationButtons();
 
-            // Event listeners
-            document.getElementById('prevDay').addEventListener('click', () => navigateToDay(-1));
-            document.getElementById('nextDay').addEventListener('click', () => navigateToDay(1));
-        });
+            // EVENT LISTENERS
+            document.getElementById('prevDay').addEventListener('click', function() { navigateToDay(-1); });
+            document.getElementById('nextDay').addEventListener('click', function() { navigateToDay(1); });
 
-        // ============================================ //
-        // OVERRIDE DAY IF FUTURE DATE //
-        // ============================================ //
+            // Vérification si on est avant le début
+            const today = new Date();
+            const startDate = new Date('2026-07-14');
+            if (today < startDate) {
+                document.getElementById('lessonContainer').innerHTML = `
+                    <div class="message-box">
+                        <div class="big-emoji">⏳</div>
+                        <h3>Les cours commencent le 14 juillet !</h3>
+                        <p>Reviens le 14 juillet pour commencer l'aventure ! 🌟</p>
+                    </div>
+                `;
+                document.getElementById('quizContainer').classList.remove('active');
+            }
 
-        // If today is before start date or after week, adjust
-        const today = new Date();
-        const startDate = new Date('2026-07-14');
-        const endDate = new Date('2026-07-20');
-        
-        if (today < startDate) {
-            // Before start date
-            document.getElementById('lessonContainer').innerHTML = `
-                <div class="message-box">
-                    <div class="big-emoji">⏳</div>
-                    <h3>Les cours commencent le 14 juillet !</h3>
-                    <p>Reviens le 14 juillet pour commencer l'aventure ! 🌟</p>
-                </div>
-            `;
-            document.getElementById('quizContainer').classList.remove('active');
+            console.log('✅ Page Islam initialisée !');
         }
     </script>
 </body>
